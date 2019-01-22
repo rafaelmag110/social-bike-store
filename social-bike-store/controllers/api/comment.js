@@ -1,22 +1,22 @@
-var Comment = require("../../models/Comment")
+var Opinion = require("../../models/Comment")
 
 //Todos os comentários
 module.exports.list = () =>{
-    return Comment
+    return Opinion
         .find()
         .exec()
 }
 
 //Comentários por utilizador
 module.exports.consultUser = userEmail =>{
-    return Comment
+    return Opinion
         .find({user:userEmail})
         .exec()
 }
 
 
 //Inserir comentário
-module.exports.inser = comment =>{
-    return Comment.create(comment)
+module.exports.inser = opinion =>{
+    return Opinion.create(opinion)
 }
 
