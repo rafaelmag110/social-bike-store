@@ -25,6 +25,8 @@ Mota:
     - Condição*
 
 Post:
+    - Utilizador
+    - Moto
     - Imagem *
     - Data de Post *
     - Likes * 
