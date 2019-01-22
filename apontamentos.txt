@@ -36,7 +36,6 @@ Comantario:
     - Utilizador*
     - Texto*
 
-
 API DADOS:
 
 Utilizador:
