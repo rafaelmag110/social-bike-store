@@ -3,9 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+
+mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser:true})
+  .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
+  .catch(()=> console.log('Erro de conexão'))
 
 var app = express();
 
