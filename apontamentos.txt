@@ -1,0 +1,67 @@
+Moto Social Store
+
+Utilizador:
+    - id*
+    - email*
+    - password*
+    - Nome*
+    - Data Nascimento*
+    - Numero Telemovel
+    - Foto
+    - Cidade *
+    - Distrito *
+    - Nacionalidade *
+    - Classificação (Cada utilizador classifica outro utilizador e é apresentada a média de classificação)*
+
+Mota:
+    - Marca*
+    - Modelo*
+    - Ano de matricula*
+    - Mês de Matricula*
+    - Tipo de Caixa*
+    - Cilindrada*
+    - Potência*
+    - Quilometros*
+    - Condição*
+
+Post:
+    - Imagem *
+    - Data de Post *
+    - Likes * 
+    - Dislikes *
+    - Comentarios 
+    - Estado *
+
+Comantario:
+    - Utilizador*
+    - Texto*
+
+
+API DADOS:
+
+Utilizador:
+    GET /api/users/ - Lista utilizadores
+    GET /api/users/id - Lista utilizador com id 
+    GET /api/users/email - Lista utilizador por email
+    POST /api/users/ - Insere um novo utilizador
+
+Bike:
+    GET /api/bikes/ - Lista motos
+    GET /api/bikes/id - Lista moto com id 
+    GET /api/bikes/marca - Lista moto por marca
+    GET /api/bikes/modelo - Lista moto por Modelo
+    POST /api/bikes/ - Insere um novo moto
+
+Post:
+    GET /api/posts/ - Lista posts
+    GET /api/posts/user - Lista posts por user
+    GET /api/posts?Marca - Lista posts por marca de moto
+    GET /api/posts?Modelo - Lista posts por Modelo de moto
+    GET /api/posts?Marca&Modelo - Lista posts por marca e Modelo de moto
+    POST /api/posts/ - Insere um novo post
+
+Comentarios:
+    GET /api/comments/ - Lista todos os comentarios na base de DADOS
+    GET /api/comments/user/ - Lista todos os comentarios por utilizador
+    GET /api/comments/post/ - Lista todos os comentarios por post
+    POST /api/comments/ - Posta um novo comentario
