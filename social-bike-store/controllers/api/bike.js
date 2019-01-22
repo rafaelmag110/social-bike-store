@@ -15,9 +15,9 @@ module.exports.consultId = id =>{
 }
 
 //Motas por marca
-module.exports.consultMark = mark=>{
+module.exports.consultMake = make =>{
     return Bike
-        .find({mark:mark})
+        .find({make:make})
         .exec()
 }
 

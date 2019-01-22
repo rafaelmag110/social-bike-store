@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
 var BikeSchema = new Schema({
-   mark : {type:String, required:true},
+   make : {type:String, required:true},
    model : {type:String, required:true},
    year : {type:Number, required:true},
    month : {type:String, required:true},

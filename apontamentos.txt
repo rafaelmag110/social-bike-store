@@ -25,14 +25,14 @@ Mota:
     - Condição*
 
 Post:
-    - Utilizador
-    - Moto
-    - Imagem *
-    - Data de Post *
-    - Likes * 
-    - Dislikes *
-    - Comentarios 
-    - Estado *
+    - user
+    - bike
+    - picture *
+    - postDate *
+    - likes * 
+    - dislikes *
+    - comments 
+    - state *
 
 Comantario:
     - Utilizador*
@@ -55,11 +55,13 @@ Bike:
 
 Post:
     GET /api/posts/ - Lista posts
-    GET /api/posts/user - Lista posts por user
+    GET /api/posts/:userid - Lista posts por user
     GET /api/posts?Marca - Lista posts por marca de moto
     GET /api/posts?Modelo - Lista posts por Modelo de moto
     GET /api/posts?Marca&Modelo - Lista posts por marca e Modelo de moto
     POST /api/posts/ - Insere um novo post
+    POST /api/posts/like/:id - Like no post
+    POST /api/posts/dislike/:id - Dislikeike no post
 
 Comentarios:
     GET /api/comments/ - Lista todos os comentarios na base de DADOS

@@ -8,6 +8,7 @@ var mongoose = require('mongoose');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var apiUsersRouter = require('./routes/api/users');
+var apiPostsRouter = require('./routes/api/posts');
 
 mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser:true})
   .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
@@ -28,6 +29,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api/users', apiUsersRouter);
+app.use('/api/posts', apiPostsRouter);
 
 
 // catch 404 and forward to error handler

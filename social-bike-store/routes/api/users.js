@@ -10,7 +10,7 @@ router.get('/', (req,res)=>{
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem de Users.'))
     } else {
-        User.listar()
+        User.list()
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro na listagem de Users.'))
     }
@@ -18,7 +18,7 @@ router.get('/', (req,res)=>{
 
 // Insert User
 router.post('/', (req,res)=>{
-    User.inserir(req.body)
+    User.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
 })
