@@ -11,13 +11,13 @@ module.exports.insert = user =>{
     return User.create(user)
 }
 
-module.exports.consult = id =>{
+module.exports.consultById = id =>{
     return User
         .findOne({_id:id})
         .exec()
 }
 
-module.exports.consult = email =>{
+module.exports.consultByEmail = email =>{
     return User
         .findOne({email:email})
         .exec()

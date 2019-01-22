@@ -4,9 +4,21 @@ var Bike = require('../../controllers/api/bike')
 
 // Get Bikes list
 router.get('/', (req,res)=>{
-    Bike.list()
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro na listagem de Bikes.'))
+    if(req.query.make){
+        Bike.consultMake(req.query.make)
+            .then(dados => res.jsonp(dados))
+            .catch(erro => res.status(500).send('Erro getting user with make'+req.params.make))
+    } else if(req.query.model){
+        Bike.consultModel(req.query.model)
+            .then(dados => res.jsonp(dados))
+            .catch(erro => res.status(500).send('Erro getting user with make'+req.params.model))
+    }
+    else {
+        Bike.list()
+            .then(dados => res.jsonp(dados))
+            .catch(erro => res.status(500).send('Erro na listagem de Bikes.'))
+    }
+    
 })
 
 
@@ -15,22 +27,6 @@ router.get('/:id',(req,res)=>{
     Bike.consultId(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
-})
-
-
-//Get Bikes by make
-router.get('/:make',(req,res)=>{
-    Bike.consultMake(req.params.make)
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro getting user with make'+req.params.make))
-})
-
-
-//Get Bikes by model
-router.get('/:model',(req,res)=>{
-    Bike.consultModel(req.params.model)
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro getting user with make'+req.params.model))
 })
 
 // Insert bike

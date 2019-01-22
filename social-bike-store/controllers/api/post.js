@@ -4,6 +4,8 @@ var Post = require('../../models/Post')
 module.exports.list = () =>{
     return Post
         .find()
+        .populate('user bike')
+        .populate('opinions.user')
         .sort({postDate:-1})
         .exec()
 }
@@ -30,6 +32,12 @@ module.exports.like = postid => {
 module.exports.dislike = postid => {
     return Post
         .update({_id:postid}, {$inc:{dislikes:1}})
+        .exec()
+}
+
+module.exports.makeOpinion = (id, opinion) => {
+    return Post
+        .update({_id:id}, {$push: {opinions: opinion}})
         .exec()
 }
 

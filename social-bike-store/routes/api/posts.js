@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router();
-var Post = require('../../controllers/api/posts')
+var Post = require('../../controllers/api/post')
 
 // Get Post list
 router.get('/', (req,res)=>{
@@ -28,9 +28,22 @@ router.get('/', (req,res)=>{
 
 // Insert Post
 router.post('/', (req,res)=>{
+    req.body.postDate = new Date();
     Post.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
+})
+
+router.post('/like/:id', (req,res)=>{
+    Post.like(req.params.id)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send(erro))
+})
+
+router.post('/dislike/:id', (req,res)=>{
+    Post.dislike(req.params.id)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send(erro))
 })
 
 // Retrieve all posts from user with id userid
@@ -38,6 +51,12 @@ router.get('/:userid',(req,res)=>{
     Post.consult(req.params.userid)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting posts from user with id'+req.params.id))
+})
+
+router.post('/opinions/:id', (req,res)=>{
+    Post.makeOpinion(req.params.id, req.body)
+        .then(dados =>{ res.jsonp(dados)})
+        .catch(erro =>{ res.status(500).send(erro)})
 })
 
 

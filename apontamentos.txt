@@ -49,16 +49,16 @@ Utilizador:
 Bike:
     GET /api/bikes/ - Lista motos
     GET /api/bikes/id - Lista moto com id 
-    GET /api/bikes/marca - Lista moto por marca
-    GET /api/bikes/modelo - Lista moto por Modelo
+    GET /api/bikes/make - Lista moto por marca
+    GET /api/bikes/model - Lista moto por Modelo
     POST /api/bikes/ - Insere um novo moto
 
 Post:
     GET /api/posts/ - Lista posts
     GET /api/posts/:userid - Lista posts por user
-    GET /api/posts?Marca - Lista posts por marca de moto
-    GET /api/posts?Modelo - Lista posts por Modelo de moto
-    GET /api/posts?Marca&Modelo - Lista posts por marca e Modelo de moto
+    GET /api/posts?make - Lista posts por marca de moto
+    GET /api/posts?model - Lista posts por Modelo de moto
+    GET /api/posts?make&model - Lista posts por marca e Modelo de moto
     POST /api/posts/ - Insere um novo post
     POST /api/posts/like/:id - Like no post
     POST /api/posts/dislike/:id - Dislikeike no post
