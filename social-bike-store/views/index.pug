@@ -17,7 +17,7 @@ block content
         .w3-col.l3.m3
           .w3-container.w3-display-center
               if loggedIn
-                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/novoPost'" value='Novo Post')
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/posts/novoPost'" value='Novo Post')
               else
                 input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/paginaRegisto'" value='Novo Post')
         if !loggedIn

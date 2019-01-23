@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router();
+var passport = require('passport');
 var Post = require('../../controllers/api/post')
 
 // Get Post list
@@ -59,14 +60,5 @@ router.post('/opinions/:id', passport.authenticate('local', { session: false }),
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
-// Autenticar um utilizador
-// router.post('/login', (req,res)=>{
-//     Post.login(req.body)
-//         .then(dados => {
-//             res.jsonp(dados);
-//             console.log(dados);
-//         })
-//         .catch(erro => res.status(500).send('Erro no login de Post.'))
-// })
 
 module.exports = router;

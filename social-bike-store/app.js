@@ -4,11 +4,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mongoose = require('mongoose');
+var uuid = require('uuid/v4')
 var passport = require('passport');
+var session = require('express-session');
+var LokiStore = require('connect-loki')(session);
 require('./controllers/auth/auth');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
 var apiUsersRouter = require('./routes/api/users');
 var apiPostsRouter = require('./routes/api/posts');
 var apiBikesRouter = require('./routes/api/bikes');
@@ -20,6 +24,18 @@ mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser
 mongoose.set('useCreateIndex',true);
 
 var app = express();
+// Sessions
+
+app.use(session({
+    genid: req =>{
+    console.log('Gerada nova sessao')
+    return uuid();
+  },
+  store: new LokiStore({}),
+  secret: "segredo",
+  resave: false,
+  saveUninitialized: true
+}))
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,9 +47,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
+app.use(passport.session());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/posts', postsRouter);
 app.use('/api/users', apiUsersRouter);
 app.use('/api/posts', apiPostsRouter);
 app.use('/api/bikes', apiBikesRouter);

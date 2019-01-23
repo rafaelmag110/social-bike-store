@@ -1,5 +1,6 @@
 var express = require('express')
 var router = express.Router();
+var passport = require('passport');
 var Bike = require('../../controllers/api/bike')
 
 // Get Bikes list
@@ -20,7 +21,6 @@ router.get('/', (req,res)=>{
     }
     
 })
-
 
 //Get Bikes by id
 router.get('/:id',(req,res)=>{
