@@ -32,11 +32,10 @@ Post:
     - likes * 
     - dislikes *
     - comments 
+        - user
+        - text
     - state *
 
-Comantario:
-    - Utilizador*
-    - Texto*
 
 API DADOS:
 
@@ -61,7 +60,7 @@ Post:
     GET /api/posts?make&model - Lista posts por marca e Modelo de moto
     POST /api/posts/ - Insere um novo post
     POST /api/posts/like/:id - Like no post
-    POST /api/posts/dislike/:id - Dislikeike no post
+    POST /api/posts/dislike/:id - Dislike no post
 
 Comentarios:
     GET /api/comments/ - Lista todos os comentarios na base de DADOS
