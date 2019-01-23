@@ -1,0 +1,203 @@
+[
+    {
+        "make": "BMW",
+        "models": 
+        [
+            {"model": "C 600 Sport"},
+            {"model": "C 650 GT"},
+            {"model": "C Evolution"},
+            {"model": "F"},
+            {"model": "G"},
+            {"model": "HP2"},
+            {"model": "HP4"},
+            {"model": "K"},
+            {"model": "R"},
+            {"model": "S"}
+        ]
+    },
+    {
+        "make": "Beta",
+        "models": 
+        [
+            {"model": "Alp"},
+            {"model": "Ark"},
+            {"model": "Eikon"},
+            {"model": "Euro"},
+            {"model": "Gara"},
+            {"model": "RR125"},
+            {"model": "RX"},
+            {"model": "TR"},
+            {"model": "Zero"}
+        ]
+    },
+    {
+        "make": "Casal",
+        "models": 
+        [
+            {"model": "Boss"},
+            {"model": "Carina"},
+            {"model": "Diana"},
+            {"model": "Futurmatic"},
+            {"model": "K"},
+            {"model": "Mamute"},
+            {"model": "Super Boss"},
+            {"model": "Titane"}
+        ]
+    },
+    {
+        "make": "Famel",
+        "models": 
+        [
+            {"model": "Faxion"},
+            {"model": "XF"},
+            {"model": "Z"}
+        ]
+    },
+    {
+        "make": "Honda",
+        "models": 
+        [
+            {"model": "ATC"},
+            {"model": "BackWidow"},
+            {"model": "CBR"},
+            {"model": "CBX"},
+            {"model": "CJ"},
+            {"model": "Derapage"},
+            {"model": "Dominator"},
+            {"model": "Fourtrax"},
+            {"model": "GoldWing"},
+            {"model": "Hornet"},
+            {"model": "Integra"},
+            {"model": "MBX"},
+            {"model": "MTX"},
+            {"model": "NM4"},
+            {"model": "Pacif Coast"},
+            {"model": "Sportrax"},
+            {"model": "Zoomer"}
+        ]
+    },
+    {
+        "make": "Kawasaki",
+        "models": 
+        [
+            {"model": "AE"},
+            {"model": "Bayou"},
+            {"model": "Brute Force"},
+            {"model": "Eliminator"},
+            {"model": "GPX"},
+            {"model": "KDX"},
+            {"model": "LTD"},
+            {"model": "Ninja"},
+            {"model": "Voyager"},
+            {"model": "Vulcan"},
+            {"model": "ZZR"}
+        ]
+    },
+    {
+        "make": "KTM",
+        "models": 
+        [
+            {"model": "ARK"},
+            {"model": "Adventure"},
+            {"model": "Bora"},
+            {"model": "Cross"},
+            {"model": "Freeride"},
+            {"model": "GO"},
+            {"model": "GS"},
+            {"model": "Incas"},
+            {"model": "MX"},
+            {"model": "Ponny"},
+            {"model": "XCE"}
+        ]
+    },
+    {
+        "make": "Macal",
+        "models": 
+        [
+            {"model": "M70"},
+            {"model": "M83"},
+            {"model": "M86"}
+        ]
+    },
+    {
+        "make": "Peugeot",
+        "models": 
+        [
+            {"model": "Buxy"},
+            {"model": "CityStart"},
+            {"model": "Django"},
+            {"model": "Elystar"},
+            {"model": "Fox"},
+            {"model": "Satelis"},
+            {"model": "Speedake"},
+            {"model": "Squab"},
+            {"model": "TSMR"},
+            {"model": "Vivacity"},
+            {"model": "Zenith"}
+        ]
+    },
+    {
+        "make": "Piaggio",
+        "models": 
+        [
+            {"model": "APE"},
+            {"model": "Bravo"},
+            {"model": "Ciao"},
+            {"model": "Diesis"},
+            {"model": "GS"},
+            {"model": "Grillo"},
+            {"model": "Liberty"},
+            {"model": "PX"},
+            {"model": "Quartz"},
+            {"model": "Storm"},
+            {"model": "Xevo"}
+        ]
+    },
+    {
+        "make": "Sachs",
+        "models": 
+        [
+            {"model": "Electra"},
+            {"model": "Elobike"},
+            {"model": "Prima"},
+            {"model": "Roadstar"},
+            {"model": "Freeride"},
+            {"model": "Saxonette"},
+            {"model": "X-Road"},
+            {"model": "XTC"}
+        ]
+    }, 
+    {
+        "make": "Suzuki",
+        "models": 
+        [
+            {"model": "AC"},
+            {"model": "AN"},
+            {"model": "Burgman"},
+            {"model": "Epicuro"},
+            {"model": "GSR"},
+            {"model": "Intruder"},
+            {"model": "Katana"},
+            {"model": "King"},
+            {"model": "LT-R"},
+            {"model": "SFV Gladius"},
+            {"model": "Wolf"},
+            {"model": "Zillion"}
+        ]
+    },
+    {
+        "make": "Yamaha",
+        "models": 
+        [
+            {"model": "Aerox"},
+            {"model": "Axis"},
+            {"model": "BT"},
+            {"model": "BWs"},
+            {"model": "Blaster"},
+            {"model": "FZ"},
+            {"model": "FZ"},
+            {"model": "FT1"},
+            {"model": "Zest"}
+        ]
+    }
+]
