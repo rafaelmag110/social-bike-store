@@ -30,7 +30,7 @@ router.get('/:id',(req,res)=>{
 })
 
 // Insert bike
-router.post('/', (req,res)=>{
+router.post('/', passport.authenticate('local', { session: false }), (req,res)=>{
     Bike.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send('Erro insert bike')})

@@ -1,9 +1,10 @@
 var express = require('express')
 var router = express.Router();
+var passport = require('passport');
 var User = require('../../controllers/api/user')
 
 // Get Users list
-router.get('/', (req,res)=>{
+router.get('/', passport.authenticate('local', { session: false }),(req,res)=>{
     if(req.query.email){
         // request has query string email
         User.consultByEmail(req.query.email)
@@ -22,9 +23,8 @@ router.post('/', (req,res)=>{
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
 })
-/* GET User by ID */
-router.get('/:id',(req,res)=>{
-    console.log('Here')
+
+router.get('/:id', passport.authenticate('local', { session: false }), (req,res)=>{
     User.consultById(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
