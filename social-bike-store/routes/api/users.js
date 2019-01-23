@@ -22,7 +22,7 @@ router.post('/', (req,res)=>{
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
 })
-
+/* GET User by ID */
 router.get('/:id',(req,res)=>{
     console.log('Here')
     User.consultById(req.params.id)
@@ -30,6 +30,12 @@ router.get('/:id',(req,res)=>{
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
+router.post('/login',(req,res)=>{
+    console.log(req.body)
+    User.login(req.body)
+        .then(dados => res.jsonp(dados))
+        .catch(erro => res.status(500).send('Erro getting user with email ' + req.params.email))
+})
 
 // Autenticar um utilizador
 // router.post('/login', (req,res)=>{

@@ -1,5 +1,39 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+    .w3-container.w3-khaki
+        .w3-col.l3.m3
+            h1 Social Bike Store
+            .w3-container
+              if !loggedIn
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/paginaRegisto'" value='Registo')
+              else 
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/logout'" value='Sair')
+        .w3-col.l3.m3
+            form.w3-container(method="GET" action="/searchBike")
+              input.w3-input.w3-border(type='text' name='make' placeholder="Marca...")
+              input.w3-input.w3-border(type='text' name='model' placeholder="Model...")
+              input.w3-btn.w3-light-grey.w3-border(type='submit' value='Procurar')
+        .w3-col.l3.m3
+          .w3-container.w3-display-center
+              if loggedIn
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/novoPost'" value='Novo Post')
+              else
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/paginaRegisto'" value='Novo Post')
+        if !loggedIn
+          .w3-col.l3.m3
+            form.w3-container(method="POST" action="/login")
+              input.w3-input.w3-border(type='text' name='email' placeholder='Email...' required)
+              input.w3-input.w3-border(type='password' name='password' placeholder='Password...' required)
+              input.w3-btn.w3-light-grey.w3-border(type='submit' value='Login')
+        else 
+            .w3-col.l3.m3
+              .w3-container.w3-left
+                a(href='/profile')
+                  img(src=user.picture width="120" height="120" right="0")
+
+          
+
+
+    .w3-row(style="height:70%;")
+

@@ -15,6 +15,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser
   .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Erro de conexão'))
 
+mongoose.set('useCreateIndex',true);
+
 var app = express();
 
 // view engine setup
@@ -32,6 +34,7 @@ app.use('/users', usersRouter);
 app.use('/api/users', apiUsersRouter);
 app.use('/api/posts', apiPostsRouter);
 app.use('/api/bikes', apiBikesRouter);
+app.use(express.static('public'))
 
 
 // catch 404 and forward to error handler
