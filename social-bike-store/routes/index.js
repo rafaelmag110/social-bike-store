@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require('axios');
+var User = require("../controllers/api/user")
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -39,9 +40,19 @@ router.post('/login',(req,res)=>{
     })
 })
 
+
+/*Método do logout*/
 router.get('/logout',(req,res)=>{
   res.render('index',{loggedIn:false})
 })
 
+/*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
+router.post("/profile", (req,res)=>{
+  User.consultByEmail(req.body.email)
+    .then(dados => {
+        res.render('profile',{user:dados})
+    })
+    .catch(erro => res.status(500).send('Erro na listagem de Users.'))
+})
 
 module.exports = router;

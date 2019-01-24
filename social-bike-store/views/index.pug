@@ -29,8 +29,10 @@ block content
         else 
             .w3-col.l3.m3
               .w3-container.w3-left
-                a(href='/profile')
+                form.w3-container(method="POST" action="/profile")
                   img(src=user.picture width="120" height="120" right="0")
+                  input(type="text" name="email" required)
+                  input.w3-btn(type="submit" value="Perfil")
 
           
 
