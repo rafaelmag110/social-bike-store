@@ -18,7 +18,8 @@ module.exports.insert = post =>{
 // Retrieve all the posts made by user with userid
 module.exports.consult = userid =>{
     return Post
-        .findOne({user:userid})
+        .find({user:userid})
+        .populate('user bike')
         .sort({postDate: -1})
         .exec()
 }

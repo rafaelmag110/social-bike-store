@@ -28,8 +28,8 @@ router.get('/', (req,res)=>{
 })
 
 // Insert Post
-router.post('/', passport.authenticate('local', { session: false }), (req,res)=>{
-    req.body.postDate = new Date();
+router.post('/',(req,res)=>{
+    req.body.postDate= new Date();
     Post.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
@@ -48,7 +48,7 @@ router.post('/dislike/:id', passport.authenticate('local', { session: false }), 
 })
 
 // Retrieve all posts from user with id userid
-router.get('/:userid', passport.authenticate('local', { session: false }),(req,res)=>{
+router.get('/:userid',(req,res)=>{
     Post.consult(req.params.userid)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting posts from user with id'+req.params.id))

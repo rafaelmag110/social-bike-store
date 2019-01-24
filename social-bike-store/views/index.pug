@@ -8,7 +8,7 @@ block content
               if !loggedIn
                 input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/paginaRegisto'" value='Registo')
               else 
-                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/logout'" value='Sair')
+                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/users/logout'" value='Sair')
         .w3-col.l3.m3
             form.w3-container(method="GET" action="/searchBike")
               input.w3-input.w3-border(type='text' name='make' placeholder="Marca...")
@@ -17,25 +17,86 @@ block content
         .w3-col.l3.m3
           .w3-container.w3-display-center
               if loggedIn
-                input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/posts/novoPost'" value='Novo Post')
+                if !userid
+                  input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/posts/postForm/"+user._id+"'" value='Novo Post')
+                else
+                  input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/posts/postForm/"+userid+"'" value='Novo Post')
               else
                 input.w3-btn.w3-light-grey.w3-border(onclick="location.href='/paginaRegisto'" value='Novo Post')
         if !loggedIn
           .w3-col.l3.m3
-            form.w3-container(method="POST" action="/login")
+            form.w3-container(method="POST" action="/users/login")
               input.w3-input.w3-border(type='text' name='email' placeholder='Email...' required)
               input.w3-input.w3-border(type='password' name='password' placeholder='Password...' required)
               input.w3-btn.w3-light-grey.w3-border(type='submit' value='Login')
         else 
             .w3-col.l3.m3
               .w3-container.w3-left
-                form.w3-container(method="POST" action="/profile")
-                  img(src=user.picture width="120" height="120" right="0")
-                  input(type="text" name="email" required)
-                  input.w3-btn(type="submit" value="Perfil")
+                  img(src="."+user.picture width="120" height="120" right="0")
+                  a(href="/profile/"+user._id)
+                    input.w3-btn.w3-light-grey.w3-border(type='submit' value='Perfil')
+    if posts
+      .w3-row
+        .w3-col-l6.m6
+          each post in posts
+            .w3-container.w3-border
+              .w3-container.w3-border
+                .w3-card-4
+                  header.w3-container.w3-khaki.w3-border
+                    h3=post.user.name+" - "+post.postDate
+                  .w3-col.l6.m6
+                    .w3-container
+                      img(src=post.picture width="500" height="auto")
+                  .w3-col.l6.m6.w3-display-container
+                    .w3-container
+                      .w3-ul
+                        li
+                          b Make 
+                          span=post.bike.make
+                        li
+                          b Model 
+                          span=post.bike.model
+                        li
+                          b Year 
+                          span=post.bike.year
+                        li
+                          b Month 
+                          span=post.bike.month
+                        li
+                          b Cylinder Capacity 
+                          span=post.bike.cylinderCapacity
+                        li
+                          b Power  
+                          span=post.bike.power
+                        li
+                          b Kilometers 
+                          span=post.bike.kilometers
+                        li
+                          b Condition 
+                          span=post.bike.condition
+                  footer
+                    input.w3-btn.w3-khaki(value="Like (" + post.likes+ ")" id="likebtn")
+                    input.w3-btn.w3-khaki(value="Dislike (" + post.dislikes+ ")" id="dislikebtn")
+              .w3-container.w3-border
+                if post.opinions
+                  .w3-card-4
+                    header.w3-container
+                      h4 Comments
+                    each opinion in post.opinions
+                      p
+                        b=opinion.user.name
+                      p=opinion.text
 
-          
+                  form.w3-container(method="POST" action="/posts/comment/"+post._id)
+                    input.w3-input.w3-border(type='text' name='text' placeholder='Write something...!')
+                    input.w3-btn.w3-light-grey.w3-border(type='submit' value='Comment')
 
-
-    .w3-row(style="height:70%;")
+                        
+                      
+                      
+                      
+                      
+                        
+                      
+                
 

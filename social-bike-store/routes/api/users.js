@@ -24,7 +24,7 @@ router.post('/', (req,res)=>{
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
-router.get('/:id', passport.authenticate('local', { session: false }), (req,res)=>{
+router.get('/:id', (req,res)=>{
     User.consultById(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
@@ -38,5 +38,15 @@ router.post('/login', passport.authenticate('local', { session: false }), (req,r
         res.status(500).send('Erro getting user with email ' + req.params.email);
     }
 })
+
+router.post('/editPicture',(req,res)=>{
+    User.editPicture(req.body.id,req.body.picture)
+        .then(dados => {
+            res.jsonp(dados)
+        })
+        .catch(erro =>{ 
+            res.status(500).send(erro)})
+})
+  
 
 module.exports = router;

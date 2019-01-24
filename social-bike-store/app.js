@@ -26,6 +26,7 @@ mongoose.set('useCreateIndex',true);
 var app = express();
 // Sessions
 
+
 app.use(session({
     genid: req =>{
     console.log('Gerada nova sessao')
@@ -56,7 +57,7 @@ app.use('/api/users', apiUsersRouter);
 app.use('/api/posts', apiPostsRouter);
 app.use('/api/bikes', apiBikesRouter);
 app.use(express.static('public'))
-
+app.use(express.static('public/uploaded'))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

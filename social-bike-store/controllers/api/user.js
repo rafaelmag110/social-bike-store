@@ -29,6 +29,13 @@ module.exports.login = user => {
         .exec()
 }
 
+module.exports.editPicture = (id,picture) =>{
+    return User
+        .findOneAndUpdate({_id:id},{$set:{picture:picture}},{new:true})
+        .exec()
+}
+
+
 // //Devolve a informação de um user
 // module.exports.consultar = (eid) =>{
 //     return Evento
