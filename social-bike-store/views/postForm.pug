@@ -1,0 +1,62 @@
+extends layout
+
+block content
+    .w3-row.w3-khaki(style="height:30%")
+        .w3-col.l6.m6
+            h1 Social Bike Store
+    .w3-row(style="height:70%")
+        form.w3-container(method='POST' action='/posts/novoPost/'+userid enctype="multipart/form-data")
+            .w3-col.l6.m6
+                .w3-container
+                    .w3-card-4
+                        header.w3-container.w3-khaki.w3-border
+                            h2 Choose your bike
+                        .w3-container
+                                p
+                                    label
+                                        b Make
+                                    p
+                                        select(name='make' id='firstmenu' class="w3-select" required)
+                                            option(value="" disabled select) ---
+                                p
+                                    label
+                                        b Model
+                                    p
+                                        select(name='model' id='secondmenu' class="w3-select")
+                                label
+                                    b Year
+                                p
+                                    select(name='year' id='yearmenu' class='w3-select' required)
+                                        option(value="" disabled select) Year
+                                label
+                                    b Month
+                                p
+                                    select(name='month' id='monthmenu' class="w3-select" required)
+                                        option(value="" disabled select) Month
+                                br
+            .w3-col.l6.m6
+                .w3-container
+                    .w3-card-4
+                        header.w3-container.w3-khaki.w3-border
+                            h2 Specify the details
+                        .w3-container
+                                br
+                                label
+                                    b Cylinder Capacity
+                                input.w3-input.w3-round-large.w3-border(type='number' name='cylinderCapacity' pattern="9[0-9]{8}" required)
+                                label
+                                    b Power
+                                input.w3-input.w3-round-large.w3-border(type='number' name='power' required)
+                                label
+                                    b Kilometers
+                                input.w3-input.w3-round-large.w3-border(type='number' name='kilometers' required)
+                                label
+                                    b Condition
+                                input.w3-input.w3-round-large.w3-border(type='text' name='condition' required)
+                                label
+                                    b Picture
+                                input.w3-input(type='file' name='picture' accept='image/*' required)
+                                br
+            footer
+                .w3-container.w3-right
+                    input.w3-btn.w3-light-grey.w3-border(type="submit" value="Postar")

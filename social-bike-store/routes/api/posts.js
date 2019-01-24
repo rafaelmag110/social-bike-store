@@ -28,8 +28,8 @@ router.get('/', (req,res)=>{
 })
 
 // Insert Post
-router.post('/', passport.authenticate('local', { session: false }), (req,res)=>{
-    req.body.postDate = new Date();
+router.post('/',(req,res)=>{
+    req.body.postDate= new Date();
     Post.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
