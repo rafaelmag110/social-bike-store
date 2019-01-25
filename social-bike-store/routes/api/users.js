@@ -40,7 +40,6 @@ router.post('/login', passport.authenticate('login', {failureRedirect:'/'}), (re
         res.jsonp(req.user);
 })
 
-
 router.post('/editPicture',(req,res)=>{
     User.editPicture(req.body.id,req.body.picture)
         .then(dados => {

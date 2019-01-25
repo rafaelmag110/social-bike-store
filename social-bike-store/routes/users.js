@@ -11,7 +11,7 @@ router.post('/registo',(req,res)=>{
   req.body.rating="0"
   axios.post("http://localhost:6400/api/users/",req.body, {headers: {cookie: req.headers.cookie}})
     .then(dados => {
-      res.render('index', {loggedIn:false})
+      res.render('homeOn', {user:dados.data})
     })
     .catch(erro => {
       console.log("Ocorreu um erro a registar o utilizador")
@@ -23,12 +23,14 @@ router.post('/registo',(req,res)=>{
 router.post('/login',(req,res)=>{
   axios.post("http://localhost:6400/api/users/login", req.body, {headers: {cookie: req.headers.cookie}})
     .then(dados => {
-      res.redirect('/');
-    })
+      axios.get('http://localhost:6400/api/posts/')
+          .then(dados2=> res.render('HomeOn',{user:dados.data,posts:dados2.data}))
+          .catch(erro => res.render('error',{error:erro, message:"Erro ao encontrar os posts"}))
     .catch(erro => {
       console.log("Ocorreu um erro a iniciar sessão")
       res.render('error',{error:erro, message:"Email ou password errada"})
     })
+  })
 })
 
 /*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
@@ -83,7 +85,5 @@ router.get('/logout',(req,res)=>{
   req.logOut()
   res.redirect('/')
 })
-
-
 
 module.exports = router;

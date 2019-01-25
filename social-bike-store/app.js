@@ -46,6 +46,7 @@ function checkSession(req,res,next){
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Sessions
+
 require('./controllers/auth/auth');
 app.use(cookieParser());
 app.use(session({

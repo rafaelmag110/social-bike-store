@@ -1,100 +1,101 @@
-extends layout
+extends layoutOnline
 
 block content
-    .w3-container.w3-cell-row(style="width:80%")
-        .w3-container.w3-cell
-            img(src=""+user.picture width="120" height="120" right="0")
-            br
-            button.w3-btn.w3-light-grey.w3-border.w3-tiny(id="editar") Editar Foto 
-        .w3-container.w3-cell(id="editarFoto" style="display:none")
-            form.w3-container(method='POST' action='/users/editPhoto/'+user._id enctype="multipart/form-data")
-                label
-                    b Foto
-                    input.w3-input( type='file' name='picture' accept='image/*' required)
-                    br
-                    center
-                        input.w3.btn-ligth-grey.w3-border(id="confirmaredicao" type='submit' value="Confirmar")
-    hr
-    .w3-container.w3-cell-row
-        .w3-container.w3-cell
-        p
-            b Ranking: #{user.rating}
-        dl
-            dt 
-                b Nome:
-            dd= user.name
-            dt 
-                b Nacionalidade:
-            dd= user.nationality
-            dt 
-                b Distrito:
-            dd= user.district
-            dt 
-                b Cidade:
-            dd= user.city
-            dt 
-                b Telemóvel:
-            dd= user.cellPhone
-            dt 
-                b Data de Nascimento:
-            dd= user.birth
-        .w3-container.w3-cell.w3-border-left(style="width:70%")
-            h1 
-                b Posts
-            if posts
-                .w3-row
-                    .w3-col-l6.m6
-                        each post in posts
-                            .w3-container.w3-border
+    div(class="bgimg")
+        .w3-container.w3-padding-64.w3-cell-row(style="width:80%")
+            .w3-container.w3-cell
+                img(src=""+user.picture width="120" height="120" right="0")
+                br
+                button.w3-btn.w3-light-grey.w3-border.w3-tiny(id="editar") Editar Foto 
+            .w3-container.w3-cell(id="editarFoto" style="display:none")
+                form.w3-container(method='POST' action='/users/editPhoto/'+user._id enctype="multipart/form-data")
+                    label
+                        b Foto
+                        input.w3-input( type='file' name='picture' accept='image/*' required)
+                        br
+                        center
+                            input.w3.btn-ligth-grey.w3-border(id="confirmaredicao" type='submit' value="Confirmar")
+        hr
+        .w3-container.w3-cell-row
+            .w3-container.w3-cell
+            p
+                b Ranking: #{user.rating}
+            dl
+                dt 
+                    b Nome:
+                dd= user.name
+                dt 
+                    b Nacionalidade:
+                dd= user.nationality
+                dt 
+                    b Distrito:
+                dd= user.district
+                dt 
+                    b Cidade:
+                dd= user.city
+                dt 
+                    b Telemóvel:
+                dd= user.cellPhone
+                dt 
+                    b Data de Nascimento:
+                dd= user.birth
+            .w3-container.w3-cell.w3-border-left(style="width:70%")
+                h1 
+                    b Posts
+                if posts
+                    .w3-row
+                        .w3-col-l6.m6
+                            each post in posts
                                 .w3-container.w3-border
-                                    .w3-card-4
-                                        header.w3-container.w3-khaki.w3-border
-                                            h3=post.user.name +" - "+post.postDate
-                                        .w3-col.l6.m6
-                                            .w3-container
-                                                img(src=""+post.picture width="300" height="auto")
-                                        .w3-col.l6.m6.w3-display-container
-                                            .w3-container
-                                                .w3-ul
-                                                    li
-                                                        b Make 
-                                                        span=post.bike.make
-                                                    li
-                                                        b Model 
-                                                        span=post.bike.model
-                                                    li
-                                                        b Year 
-                                                        span=post.bike.year
-                                                    li
-                                                        b Month 
-                                                        span=post.bike.month
-                                                    li
-                                                        b Cylinder Capacity 
-                                                        span=post.bike.cylinderCapacity
-                                                    li
-                                                        b Power  
-                                                        span=post.bike.power
-                                                    li
-                                                        b Kilometers 
-                                                        span=post.bike.kilometers
-                                                    li
-                                                        b Condition 
-                                                        span=post.bike.condition
-                                        footer
-                                            input.w3-btn.w3-khaki(value="Like (" + post.likes+ ")" id="likebtn")
-                                            input.w3-btn.w3-khaki(value="Dislike (" + post.dislikes+ ")" id="dislikebtn")
-                                .w3-container.w3-border
-                                    if post.opinions
+                                    .w3-container.w3-border
                                         .w3-card-4
-                                            header.w3-container
-                                                h4 Comments
-                                            each opinion in post.opinions
-                                                p
-                                                    b=opinion.user.name
-                                                p=opinion.text
+                                            header.w3-container.w3-khaki.w3-border
+                                                h3=post.user.name +" - "+post.postDate
+                                            .w3-col.l6.m6
+                                                .w3-container
+                                                    img(src=""+post.picture width="300" height="auto")
+                                            .w3-col.l6.m6.w3-display-container
+                                                .w3-container
+                                                    .w3-ul
+                                                        li
+                                                            b Make 
+                                                            span=post.bike.make
+                                                        li
+                                                            b Model 
+                                                            span=post.bike.model
+                                                        li
+                                                            b Year 
+                                                            span=post.bike.year
+                                                        li
+                                                            b Month 
+                                                            span=post.bike.month
+                                                        li
+                                                            b Cylinder Capacity 
+                                                            span=post.bike.cylinderCapacity
+                                                        li
+                                                            b Power  
+                                                            span=post.bike.power
+                                                        li
+                                                            b Kilometers 
+                                                            span=post.bike.kilometers
+                                                        li
+                                                            b Condition 
+                                                            span=post.bike.condition
+                                            footer
+                                                input.w3-btn.w3-khaki(value="Like (" + post.likes+ ")" id="likebtn")
+                                                input.w3-btn.w3-khaki(value="Dislike (" + post.dislikes+ ")" id="dislikebtn")
+                                    .w3-container.w3-border
+                                        if post.opinions
+                                            .w3-card-4
+                                                header.w3-container
+                                                    h4 Comments
+                                                each opinion in post.opinions
+                                                    p
+                                                        b=opinion.user.name
+                                                    p=opinion.text
 
-                                        form.w3-container(method="POST" action="/posts/comment/"+post._id)
-                                            input.w3-input.w3-border(type='text' name='text' placeholder='Write something...!')
-                                            input.w3-btn.w3-light-grey.w3-border(type='submit' value='Comment')
+                                            form.w3-container(method="POST" action="/posts/comment/"+post._id)
+                                                input.w3-input.w3-border(type='text' name='text' placeholder='Write something...!')
+                                                input.w3-btn.w3-light-grey.w3-border(type='submit' value='Comment')
 
-                                            
+                                                
