@@ -7,9 +7,11 @@ var fs = require('fs');
 var bikeDB = require('../public/bike_data.json')
 
 /* Formulário de novo post */
-router.get('/postForm/:id',(req, res)=>{
-    res.render('postForm',{bikes:bikeDB, userid:req.params.id})
-});
+router.get('/postForm/:id', (req, res)=>{
+    axios.get("http://localhost:6400/api/users/"+req.params.id)
+        .then(dados=> res.render('postForm',{bikes:bikeDB, user:dados.data}))
+        .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
+})
 
 router.get('/getBikes',(req,res)=>{
     res.jsonp(bikeDB);
@@ -42,11 +44,21 @@ router.post('/opinion/:id',(req,res)=>{
             res.status(500).send("Comment fail")
         })
 })
-
-router.post('/novoPost/:id',(req,res)=>{
+router.post('/novoPost/:id', (req,res)=>{
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1;
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd;
+    }
+    if (mm < 10) {
+        mm = '0' + mm;
+    }
+    today = yyyy + '-' + mm + '-' + dd;
     var form = new formidable.IncomingForm()
     form.parse(req,(erros,fields,files)=>{
-        console.log(req.body)
+        // console.log(req.body)
         var fenviado = files.picture.path
         var fnovo = './public/uploaded/bikes/' + files.picture.name
         var bike = {}
@@ -63,14 +75,14 @@ router.post('/novoPost/:id',(req,res)=>{
             if(!err){
                 axios.post("http://localhost:6400/api/bikes/",bike)
                     .then(resposta => {
-                        fnovo = './uploaded/bikes/' + files.picture.name
+                        fnovo = '/uploaded/bikes/' + files.picture.name
                         post.opinions = []
                         post.bike = resposta.data._id
                         post.user = req.params.id
                         post.picture = fnovo
                         axios.post("http://localhost:6400/api/posts/",post)
                             .then(resposta=>{
-                                res.render('index',{loggedIn:false})
+                                res.redirect('/')
                             })    
                             .catch(erro => {
                                 res.render('error',{error:erro,message:"Ocorreu um erro a guardar o post na BD"})

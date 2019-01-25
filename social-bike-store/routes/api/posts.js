@@ -18,12 +18,12 @@ router.get('/', (req,res)=>{
     } else if(req.query.model){
         // request has query string model
         Post.consult(req.query.model)
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro na listagem de Posts por modelo.'))
+            .then(dados => res.jsonp(dados))
+            .catch(erro => res.status(500).send('Erro na listagem de Posts por modelo.'))
     } else {
         Post.list()
-        .then(dados => res.jsonp(dados))
-        .catch(erro => res.status(500).send('Erro na listagem de Users.'))
+            .then(dados => res.jsonp(dados))
+            .catch(erro => res.status(500).send('Erro na listagem de Posts.'))
     }
 })
 
@@ -35,7 +35,7 @@ router.post('/',(req,res)=>{
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
-router.post('/like/:id',(req,res)=>{
+router.post('/like/:id', (req,res)=>{
     Post.like(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send(erro))

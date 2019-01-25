@@ -1,10 +1,11 @@
 var express = require('express')
 var router = express.Router();
 var passport = require('passport');
+var jwt = require('jsonwebtoken')
 var User = require('../../controllers/api/user')
 
 // Get Users list
-router.get('/', passport.authenticate('local', { session: false }),(req,res)=>{
+router.get('/', (req,res)=>{
     if(req.query.email){
         // request has query string email
         User.consultByEmail(req.query.email)
@@ -30,13 +31,13 @@ router.get('/:id', (req,res)=>{
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
-router.post('/login', passport.authenticate('local', { session: false }), (req,res)=>{
-    console.log(req.user);
-    if(req.isAuthenticated()){
+router.post('/login', passport.authenticate('login', {failureRedirect:'/'}), (req,res)=> {
+        var myuser = {_id: req.user._id, email:req.user.email};
+        // Geração do token
+        var token = jwt.sign({user: myuser}, 'dweb2018');
+        req.session.token = token;
+        console.log('Token stored in ' + req.sessionID)
         res.jsonp(req.user);
-    } else {
-        res.status(500).send('Erro getting user with email ' + req.params.email);
-    }
 })
 
 router.post('/editPicture',(req,res)=>{

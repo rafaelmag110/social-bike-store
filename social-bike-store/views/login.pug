@@ -1,0 +1,15 @@
+extends layoutOffline
+block content
+    div(class="bgimg")
+        .w3-container.w3-padding-64
+            h2 Login
+            form.w3-container(method="POST" action="/users/login")
+                label
+                    b Email
+                input.w3-input.w3-border(type='text' name='email' placeholder='Email...' required)
+                br
+                label
+                    b Password
+                input.w3-input.w3-border(type='password' name='password' placeholder='Password...' required)
+                br
+                input.w3-btn.w3-light-grey.w3-border(type='submit' value='Login' onclick="location.href='/'")

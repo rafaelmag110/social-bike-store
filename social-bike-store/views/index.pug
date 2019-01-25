@@ -34,8 +34,8 @@ block content
         else 
             .w3-col.l3.m3
               .w3-container.w3-left
-                  img(src="."+user.picture width="120" height="120" right="0")
-                  a(href="/profile/"+user._id)
+                  img(src=""+user.picture width="120" height="120" right="0")
+                  a(href="/users/profile/"+user._id)
                     input.w3-btn.w3-light-grey.w3-border(type='submit' value='Perfil')
     if posts
       .w3-row

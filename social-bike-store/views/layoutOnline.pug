@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title= title
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width = device-width, initial-scale = 1")
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/w3.css')
+    link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css")
+    script(src="/scripts/jquery.js")
+    script(src="/scripts/posts.js")
+    script(src="/scripts/editPhoto.js")
+    style
+      include ../public/stylesheets/home.css
+  body(style="padding:0")
+    nav(class="navbar navbar-inverse navbar-fixed-top")
+      div(class="container-fluid")
+        div(class="navbar-header")
+          a(class="navbar-brand" href="/") Social Bike Store
+        ul(class="nav navbar-nav")
+          li
+            a(href="/posts/postForm/"+user._id) Novo Post
+        ul(class="nav navbar-nav navbar-right")
+            li
+              a(href="/users/profile/"+user._id)
+                img(src=""+user.picture width="30" height="30" right="0")
+            li 
+              a(href="/users/logout")
+                span(class="glyphicon glyphicon-log-out") Logout
+
+    block content
