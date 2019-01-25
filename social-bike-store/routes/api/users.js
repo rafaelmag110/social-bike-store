@@ -41,14 +41,13 @@ router.post('/login', async (req,res,next) => {
                 else
                     return next(new Error('The user is not registered!'))
             }
-            req.login(user, {session: true}, async(error) =>{
+            req.login(user, {session: false}, async(error) =>{
                 if(error) return next(error);
                 var myuser = {_id: user._id, email:user.email};
                 // Geração do token
                 var token = jwt.sign({user: myuser}, 'dweb2018');
-                console.log(req.session)
                 req.session.cookie.token = token;
-                console.log(req.session)
+                console.log('Token stored in ' + req.sessionID)
                 res.jsonp(user);
             })
         } catch(error){

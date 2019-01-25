@@ -9,6 +9,14 @@ var passport = require('passport');
 var session = require('express-session');
 var LokiStore = require('connect-loki')(session);
 
+// Route MiddleWare
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var postsRouter = require('./routes/posts');
+var apiUsersRouter = require('./routes/api/users');
+var apiPostsRouter = require('./routes/api/posts');
+var apiBikesRouter = require('./routes/api/bikes');
+
 // Mongoose Connection
 mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser:true})
   .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
@@ -18,6 +26,40 @@ mongoose.set('useCreateIndex',true);
 
 var app = express();
 
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+
+// Funçaõ inversa
+passport.deserializeUser((uid, done) => {
+  User.findById(id, function (err, user) {
+    done(null, user);
+  });
+})
+
+app.use(express.static(path.join(__dirname, 'public')));
+// Sessions
+require('./controllers/auth/auth');
+app.use(session({
+  genid: req =>{
+    console.log('Gerada nova sessao')
+    return uuid();
+  },
+  store: new LokiStore({}),
+  secret: "segredo",
+  resave: false,
+  saveUninitialized: true
+}))
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(cookieParser());
+
+app.use((req,res,next)=>{
+  console.log('User connected with session ' + req.sessionID);
+  next()
+})
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
@@ -25,39 +67,8 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static('public'))
-app.use(express.static('public/uploaded'))
-
-// Sessions
-require('./controllers/auth/auth');
-app.use(session({
-    genid: req =>{
-    console.log('Gerada nova sessao')
-    return uuid();
-  },
-  store: new LokiStore({}),
-  secret: "segredo",
-  resave: false,
-  saveUninitialized: false
-}))
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-
-// Route MiddleWare
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var postsRouter = require('./routes/posts');
-var apiUsersRouter = require('./routes/api/users');
-var apiPostsRouter = require('./routes/api/posts');
-var apiBikesRouter = require('./routes/api/bikes');
+// app.use(express.static('public'))
+// app.use(express.static('public/uploaded'))
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
