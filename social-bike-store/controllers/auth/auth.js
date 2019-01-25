@@ -1,9 +1,9 @@
 var passport = require('passport')
-var localStrategy = require('passport-local').Strategy
+var LocalStrategy = require('passport-local').Strategy
 var UserModel = require('../../models/User')
 
 // Registo de um utilizador
-passport.use('registo', new localStrategy({
+passport.use('registo', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, async (email, password, done) =>{
@@ -16,28 +16,19 @@ passport.use('registo', new localStrategy({
     }
 }))
 
-// Estrategia de autenticação de um utilizador
-passport.use('login', new localStrategy({
-    usernameField: 'email',
-    passwordField: 'password'
-}, async (email, password, done) =>{
-    try{
-        // Vai buscar o utilizador
-        var user = await UserModel.findOne({email})
-        if(!user) 
-            return done(null, false, {message:'Utilizador não existe.'})
-        
-        // Valida a password
-        var valid = await user.isValidPassword(password);
-        if(!valid)
-            return done(null, false, {message:'Password invalida.'})
-
-        return done(null, user, {message:'Login feito com sucesso'});
+passport.use('login', new LocalStrategy({
+    usernameField: 'email'
+    },
+    function(username, password, done) {
+        UserModel.findOne({ email: username }, function (err, user) {
+            
+            if (err) { return done(err); }
+            if (!user) { return done(null, false); }
+            if (!user.isValidPassword(password)) { return done(null, false); }
+            return done(null, user);
+      });
     }
-    catch(error){
-        return done(error);
-    }
-}) )
+  ));
 
 // Autenticacao com JWT
 var JWTStrategy = require('passport-jwt').Strategy
@@ -45,9 +36,7 @@ var ExtractJWT = require('passport-jwt').ExtractJwt
 
 var extractFromSession = function(req){
     var token = null;
-    console.log(req.sessionID)
     if(req && req.session) token = req.session.token
-    console.log(token)
     return token;
 }
 

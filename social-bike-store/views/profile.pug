@@ -3,11 +3,11 @@ extends layout
 block content
     .w3-container.w3-cell-row(style="width:80%")
         .w3-container.w3-cell
-            img(src="."+user.picture width="120" height="120" right="0")
+            img(src=""+user.picture width="120" height="120" right="0")
             br
             button.w3-btn.w3-light-grey.w3-border.w3-tiny(id="editar") Editar Foto 
         .w3-container.w3-cell(id="editarFoto" style="display:none")
-            form.w3-container(method='POST' action='/editPhoto/'+user._id enctype="multipart/form-data")
+            form.w3-container(method='POST' action='/users/editPhoto/'+user._id enctype="multipart/form-data")
                 label
                     b Foto
                     input.w3-input( type='file' name='picture' accept='image/*' required)
@@ -52,7 +52,7 @@ block content
                                             h3=post.user.name +" - "+post.postDate
                                         .w3-col.l6.m6
                                             .w3-container
-                                                img(src="."+post.picture width="300" height="auto")
+                                                img(src=""+post.picture width="300" height="auto")
                                         .w3-col.l6.m6.w3-display-container
                                             .w3-container
                                                 .w3-ul

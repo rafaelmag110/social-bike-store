@@ -15,7 +15,7 @@ router.get('/getBikes',(req,res)=>{
     res.jsonp(bikeDB);
 })
 
-router.post('/novoPost/:id',(req,res)=>{
+router.post('/novoPost/:id', passport.authenticate('jwt', {session:false}), (req,res)=>{
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -29,7 +29,7 @@ router.post('/novoPost/:id',(req,res)=>{
     today = yyyy + '-' + mm + '-' + dd;
     var form = new formidable.IncomingForm()
     form.parse(req,(erros,fields,files)=>{
-        console.log(req.body)
+        // console.log(req.body)
         var fenviado = files.picture.path
         var fnovo = './public/uploaded/bikes/' + files.picture.name
         var bike = {}
@@ -46,7 +46,7 @@ router.post('/novoPost/:id',(req,res)=>{
             if(!err){
                 axios.post("http://localhost:6400/api/bikes/",bike)
                     .then(resposta => {
-                        fnovo = './uploaded/bikes/' + files.picture.name
+                        fnovo = '/uploaded/bikes/' + files.picture.name
                         post.opinions = []
                         post.bike = resposta.data._id
                         post.user = req.params.id

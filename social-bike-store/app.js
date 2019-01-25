@@ -24,41 +24,46 @@ mongoose.connect('mongodb://127.0.0.1:27017/social-bike-store', {useNewUrlParser
 
 mongoose.set('useCreateIndex',true);
 
-var app = express();
-
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });
 
 // Funçaõ inversa
+var User = require('./models/User')
 passport.deserializeUser((uid, done) => {
-  User.findById(id, function (err, user) {
+  User.findById(uid, function (err, user) {
     done(null, user);
   });
 })
 
+var app = express();
+
+function checkSession(req,res,next){
+  console.log('User connected with session ' + req.sessionID + ' on ' + req.url);
+  next()
+}
+
 app.use(express.static(path.join(__dirname, 'public')));
+
 // Sessions
 require('./controllers/auth/auth');
+app.use(cookieParser());
 app.use(session({
   genid: req =>{
-    console.log('Gerada nova sessao')
+    console.log('Gerada nova sessao ' + req.sessionID + ' '+req.url)
     return uuid();
   },
   store: new LokiStore({}),
   secret: "segredo",
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { secure: false }
 }))
 
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(cookieParser());
 
-app.use((req,res,next)=>{
-  console.log('User connected with session ' + req.sessionID);
-  next()
-})
+app.use(checkSession);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

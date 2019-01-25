@@ -31,30 +31,15 @@ router.get('/:id', (req,res)=>{
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
-router.post('/login', async (req,res,next) => {
-    passport.authenticate('login', async (err,user,info)=>{
-        
-        try{
-            if(err || !user){
-                if(err)
-                    return next(err);
-                else
-                    return next(new Error('The user is not registered!'))
-            }
-            req.login(user, {session: false}, async(error) =>{
-                if(error) return next(error);
-                var myuser = {_id: user._id, email:user.email};
-                // Geração do token
-                var token = jwt.sign({user: myuser}, 'dweb2018');
-                req.session.cookie.token = token;
-                console.log('Token stored in ' + req.sessionID)
-                res.jsonp(user);
-            })
-        } catch(error){
-            return next(error);
-        }
-    })(req,res,next);
+router.post('/login', passport.authenticate('login', {failureRedirect:'/'}), (req,res)=> {
+        var myuser = {_id: req.user._id, email:req.user.email};
+        // Geração do token
+        var token = jwt.sign({user: myuser}, 'dweb2018');
+        req.session.token = token;
+        console.log('Token stored in ' + req.sessionID)
+        res.jsonp(req.user);
 })
+
 
 router.post('/editPicture',(req,res)=>{
     User.editPicture(req.body.id,req.body.picture)
