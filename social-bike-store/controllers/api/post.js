@@ -26,19 +26,19 @@ module.exports.consult = userid =>{
 
 module.exports.like = postid => {
     return Post
-        .update({_id:postid}, {$inc:{likes:1}})
+        .updateOne({_id:postid}, {$inc:{likes:1}})
         .exec()
 }
 
 module.exports.dislike = postid => {
     return Post
-        .update({_id:postid}, {$inc:{dislikes:1}})
+        .updateOne({_id:postid}, {$inc:{dislikes:1}})
         .exec()
 }
 
 module.exports.makeOpinion = (id, opinion) => {
     return Post
-        .update({_id:id}, {$push: {opinions: opinion}})
+        .updateOne({_id:id}, {$push: {opinions: opinion}})
         .exec()
 }
 

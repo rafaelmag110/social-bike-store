@@ -35,13 +35,13 @@ router.post('/',(req,res)=>{
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
-router.post('/like/:id', passport.authenticate('local', { session: false }), (req,res)=>{
+router.post('/like/:id',(req,res)=>{
     Post.like(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send(erro))
 })
 
-router.post('/dislike/:id', passport.authenticate('local', { session: false }), (req,res)=>{
+router.post('/dislike/:id', (req,res)=>{
     Post.dislike(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send(erro))
@@ -54,7 +54,7 @@ router.get('/:userid',(req,res)=>{
         .catch(erro => res.status(500).send('Erro getting posts from user with id'+req.params.id))
 })
 
-router.post('/opinions/:id', passport.authenticate('local', { session: false }), (req,res)=>{
+router.post('/opinions/:id', (req,res)=>{
     Post.makeOpinion(req.params.id, req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})

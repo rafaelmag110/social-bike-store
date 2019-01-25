@@ -42,6 +42,22 @@ router.get("/profile/:id", (req,res)=>{
 })
 
 
+router.get('/searchBike/',(req,res)=>{
+  axios.get('http://localhost:6400/api/posts/')
+      .then(dados => {
+        var filteredPosts = []
+        for(i=0; i<dados.data.length;i++){
+          if(dados.data[i].bike.make == req.query.make)
+            if(dados.data[i].bike.model == req.query.model || req.query.model=="all")
+              filteredPosts.push(dados.data[i])
+        }
+
+        res.render('index',{loggedIn:false, posts:filteredPosts})
+      })
+      .catch(erro => res.render('error',{error:erro,message:"Erro na procura das bikes"}))
+})
+
+
 /*EditPerfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
 router.post("/editPhoto/:id", (req,res)=>{
 

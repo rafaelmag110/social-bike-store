@@ -8,11 +8,11 @@ router.get('/', (req,res)=>{
     if(req.query.make){
         Bike.consultMake(req.query.make)
             .then(dados => res.jsonp(dados))
-            .catch(erro => res.status(500).send('Erro getting user with make'+req.params.make))
+            .catch(erro => res.status(500).send('Erro getting bike with make'+req.params.make))
     } else if(req.query.model){
         Bike.consultModel(req.query.model)
             .then(dados => res.jsonp(dados))
-            .catch(erro => res.status(500).send('Erro getting user with make'+req.params.model))
+            .catch(erro => res.status(500).send('Erro getting bike with model'+req.params.model))
     }
     else {
         Bike.list()

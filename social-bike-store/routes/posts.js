@@ -15,18 +15,35 @@ router.get('/getBikes',(req,res)=>{
     res.jsonp(bikeDB);
 })
 
+router.get('/getPosts',(req,res)=>{
+    axios.get('http://localhost:6400/api/posts/')
+        .then(dados => res.jsonp(dados.data))
+        .catch(erro => res.status(500).send("Erro a obter os posts"))
+})
+
+router.post('/like/:id',(req,res)=>{
+    axios.post('http://localhost:6400/api/posts/like/'+req.params.id)
+        .then(dados => console.log("Like sucess: postid:" + req.params.id))
+        .catch(erro => console.log("Like fail: postid:" + req.params.id))
+})
+
+
+router.post('/dislike/:id',(req,res)=>{
+    axios.post('http://localhost:6400/api/posts/dislike/'+req.params.id)
+        .then(dados => console.log("Dislike success: postid:" + req.params.id))
+        .catch(erro => console.log("Dislike fail: postid:" + req.params.id))
+})
+/*adicionar user ao reqbody*/ 
+router.post('/opinion/:id',(req,res)=>{
+    axios.post('http://localhost:6400/api/posts/opinions/'+req.params.id,req.body)
+        .then(dados => console.log("Comment success: postid:" +req.params.id))
+        .catch(erro => {
+            console.log("Comment fail: postid:" +req.params.id)
+            res.status(500).send("Comment fail")
+        })
+})
+
 router.post('/novoPost/:id',(req,res)=>{
-    var today = new Date();
-    var dd = today.getDate();
-    var mm = today.getMonth() + 1;
-    var yyyy = today.getFullYear();
-    if (dd < 10) {
-        dd = '0' + dd;
-    }
-    if (mm < 10) {
-        mm = '0' + mm;
-    }
-    today = yyyy + '-' + mm + '-' + dd;
     var form = new formidable.IncomingForm()
     form.parse(req,(erros,fields,files)=>{
         console.log(req.body)
@@ -51,7 +68,6 @@ router.post('/novoPost/:id',(req,res)=>{
                         post.bike = resposta.data._id
                         post.user = req.params.id
                         post.picture = fnovo
-                        //post.postDate = today
                         axios.post("http://localhost:6400/api/posts/",post)
                             .then(resposta=>{
                                 res.render('index',{loggedIn:false})
