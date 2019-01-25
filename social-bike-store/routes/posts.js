@@ -7,7 +7,7 @@ var fs = require('fs');
 var bikeDB = require('../public/bike_data.json')
 
 /* Formulário de novo post */
-router.get('/postForm/:id',(req, res)=>{
+router.get('/postForm/:id', passport.authenticate('jwt', {session:false, failureRedirect:'/paginaRegisto'}), (req, res)=>{
     res.render('postForm',{bikes:bikeDB, userid:req.params.id})
 });
 

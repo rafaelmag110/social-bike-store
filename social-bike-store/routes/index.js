@@ -71,7 +71,6 @@ router.post("/editPhoto/:id", (req,res)=>{
           }
       })
   })
-
 })
 
 module.exports = router;
