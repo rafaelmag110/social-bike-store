@@ -16,16 +16,16 @@ html
     nav(class="navbar navbar-inverse navbar-fixed-top")
       div(class="container-fluid")
         div(class="navbar-header")
-          a(class="navbar-brand" href="/homeOn/"+user._id) Social Bike Store
+          a(class="navbar-brand" href="/") Social Bike Store
         ul(class="nav navbar-nav")
           li
             a(href="/posts/postForm/"+user._id) Novo Post
         ul(class="nav navbar-nav navbar-right")
             li
-              a(href="/profile/"+user._id)
-                img(src="../."+user.picture width="30" height="30" right="0")
+              a(href="/users/profile/"+user._id)
+                img(src=""+user.picture width="30" height="30" right="0")
             li 
-              a(href="/")
+              a(href="/users/logout")
                 span(class="glyphicon glyphicon-log-out") Logout
 
     block content

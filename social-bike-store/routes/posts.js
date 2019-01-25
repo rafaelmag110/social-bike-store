@@ -17,7 +17,7 @@ router.get('/getBikes',(req,res)=>{
     res.jsonp(bikeDB);
 })
 
-router.post('/novoPost/:id', passport.authenticate('jwt', {session:false}), (req,res)=>{
+router.post('/novoPost/:id', (req,res)=>{
     var today = new Date();
     var dd = today.getDate();
     var mm = today.getMonth() + 1;
@@ -56,7 +56,7 @@ router.post('/novoPost/:id', passport.authenticate('jwt', {session:false}), (req
                         //post.postDate = today
                         axios.post("http://localhost:6400/api/posts/",post)
                             .then(resposta=>{
-                                res.redirect('/homeOn/'+req.params.id)
+                                res.redirect('/')
                             })    
                             .catch(erro => {
                                 res.render('error',{error:erro,message:"Ocorreu um erro a guardar o post na BD"})
