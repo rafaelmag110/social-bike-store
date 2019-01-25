@@ -39,6 +39,8 @@ passport.deserializeUser((uid, done) => {
 
 app.use(express.static(path.join(__dirname, 'public')));
 // Sessions
+
+/*
 require('./controllers/auth/auth');
 app.use(session({
   genid: req =>{
@@ -59,7 +61,7 @@ app.use((req,res,next)=>{
   console.log('User connected with session ' + req.sessionID);
   next()
 })
-
+*/
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');

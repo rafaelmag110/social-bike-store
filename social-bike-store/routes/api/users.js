@@ -31,6 +31,14 @@ router.get('/:id', (req,res)=>{
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
+
+router.post("/login",(req,res)=>{
+    User.login(req.body)
+        .then(dados => {
+            res.jsonp(dados)})
+        .catch(erro => res.status(500).send('Erro ao inserir User'))
+})
+/*
 router.post('/login', async (req,res,next) => {
     passport.authenticate('login', async (err,user,info)=>{
         
@@ -46,7 +54,7 @@ router.post('/login', async (req,res,next) => {
                 var myuser = {_id: user._id, email:user.email};
                 // Geração do token
                 var token = jwt.sign({user: myuser}, 'dweb2018');
-                req.session.cookie.token = token;
+                req.session.token = token;
                 console.log('Token stored in ' + req.sessionID)
                 res.jsonp(user);
             })
@@ -54,7 +62,7 @@ router.post('/login', async (req,res,next) => {
             return next(error);
         }
     })(req,res,next);
-})
+})*/
 
 router.post('/editPicture',(req,res)=>{
     User.editPicture(req.body.id,req.body.picture)

@@ -7,9 +7,11 @@ var fs = require('fs');
 var bikeDB = require('../public/bike_data.json')
 
 /* Formulário de novo post */
-router.get('/postForm/:id', passport.authenticate('jwt', {session:false, failureRedirect:'/paginaRegisto'}), (req, res)=>{
-    res.render('postForm',{bikes:bikeDB, userid:req.params.id})
-});
+router.get('/postForm/:id', (req, res)=>{
+    axios.get("http://localhost:6400/api/users/"+req.params.id)
+        .then(dados=> res.render('postForm',{bikes:bikeDB, user:dados.data}))
+        .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
+})
 
 router.get('/getBikes',(req,res)=>{
     res.jsonp(bikeDB);
@@ -54,7 +56,7 @@ router.post('/novoPost/:id',(req,res)=>{
                         //post.postDate = today
                         axios.post("http://localhost:6400/api/posts/",post)
                             .then(resposta=>{
-                                res.render('index',{loggedIn:false})
+                                res.redirect('/homeOn/'+req.params.id)
                             })    
                             .catch(erro => {
                                 res.render('error',{error:erro,message:"Ocorreu um erro a guardar o post na BD"})
