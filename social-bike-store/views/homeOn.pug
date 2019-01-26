@@ -5,11 +5,13 @@ block content
       .w3-container.w3-padding-64
         form.w3-container(method="GET" action="/searchBike")
           .w3-col.l3.m3
-            input.w3-input.w3-border(type='text' name='make' placeholder="Marca...")
+            select.w3-select-bigger(name='make' id='makemenu' class="w3-select" required)
+                option(value="" disabled select) ---          .w3-col.l3.m3
           .w3-col.l3.m3
-            input.w3-input.w3-border(type='text' name='model' placeholder="Model...")
+            select.w3-select-bigger(name='model' id='modelmenu' class="w3-select" required)
+                option(value="all") All
           .w3-col.l3.m3
-            input.w3-btn.w3-light-grey.w3-border(type='submit' value='Procurar')
+            input.w3-btn.w3-light-grey.w3-border.w3-select-bigger(type='submit' value='Procurar')
       if posts
         .w3-row
           .w3-col-l6.m6
@@ -50,18 +52,21 @@ block content
                             b Condition 
                             span=post.bike.condition
                     footer
-                      input.w3-btn.w3-khaki(value="Like (" + post.likes+ ")" id="likebtn")
-                      input.w3-btn.w3-khaki(value="Dislike (" + post.dislikes+ ")" id="dislikebtn")
+                      .w3-btn.w3-khaki(value=post.likes id="like"+post._id) Like 
+                        label="("+post.likes+")"
+                      .w3-btn.w3-khaki(value=post.dislikes id="dislike"+post._id) Dislike 
+                        label="("+post.dislikes+")"
                 .w3-container.w3-border
                   if post.opinions
                     .w3-card-4
-                      header.w3-container
-                        h4 Comments
+                    header.w3-container
+                      h4 Comments
+                    .w3-container(id="opinions"+post._id)
                       each opinion in post.opinions
                         p
                           b=opinion.user.name
                         p=opinion.text
 
-                    form.w3-container(method="POST" action="/posts/comment/"+post._id)
-                      input.w3-input.w3-border(type='text' name='text' placeholder='Write something...!')
-                      input.w3-btn.w3-light-grey.w3-border(type='submit' value='Comment')
+                form.w3-container(id="opinion"+post._id)
+                  textarea.w3-input.w3-border(type='text' id='body'+post._id placeholder='Write something...!')
+                  input.w3-btn.w3-light-grey.w3-border(id="addOpinion"+post._id value='Comment')
