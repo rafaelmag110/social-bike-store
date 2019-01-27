@@ -58,7 +58,7 @@ router.get("/profile/:id", (req,res)=>{
     .then(dados1 => {
       axios.get('http://localhost:6400/api/posts/'+req.params.id)
         .then(dados2=> {
-          // console.log(dados2.data)
+          console.log(dados2.data)
           res.render("profile",{user:dados1.data, posts:dados2.data})
         })
         .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
