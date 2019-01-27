@@ -3,7 +3,7 @@ extends layoutOffline
 block content
     div(class="bgimg")
         .w3-container.w3-padding-64
-            h2 Registar
+            h2 Register
             .w3-container
                 form.w3-container(method='POST' action='/users/registo')
                     label
@@ -13,22 +13,22 @@ block content
                         b Password
                     input.w3-input(type='password' name='password' required)
                     label
-                        b Nome
+                        b Name
                     input.w3-input(type='text' name='name' required)
                     label
-                        b Data Nascimento
+                        b Birth
                     input.w3-input(type='date' name='birth' required)
                     label
-                        b Número telemóvel
+                        b CellPhone
                     input.w3-input(type='text' name='cellPhone' pattern="9[0-9]{8}" required)
                     label
-                        b Cidade
+                        b City
                     input.w3-input(type='text' name='city' required)
                     label
-                        b Distrito
+                        b District
                     input.w3-input(type='text' name='district' required)
                     label
-                        b Nacionalidade
+                        b Nationality
                     input.w3-input(type='text' name='nationality' required)
                     br
-                    input.w3-btn.w3-light-grey.w3-border(type="submit" value="Registar" onclick="location.href='/'")
+                    input.w3-btn.w3-grey.w3-round(type="submit" value="Confirm" onclick="location.href='/'")

@@ -2,11 +2,72 @@ extends layoutOffline
 
 block content
     div(class="bgimg")
-        center
-            div(class="w3-display-middle")
-                h1(class="w3-jumbo w3-animate-top") Social Bike Store
-                hr(class="w3-border-grey" style="margin:auto;width:40%")
-                br
-                br
-                center
-                    p A Social Bike Store é uma rede social, lançada a 25 de janeiro de 2019, por uma equipa de alunos da Universidade do Minho, no âmbito da unidade curricular de Desenvolvimento de Aplicações Web. Mais treta....
+      .w3-container.w3-padding-90
+        form.w3-container(method="GET" action="/searchBike" class="w3-cell-row w3-margin-right")
+          .w3-container.w3-cell
+            select.w3-select-bigger(name='make' id='makemenu' class="w3-select w3-margin-bottom" required)
+                option(value="" disabled select) ---
+          .w3-container.w3-cell
+            select.w3-select-bigger(name='model' id='modelmenu' class="w3-select w3-margin-bottom" required)
+                option(value="all") All
+          .w3-container.w3-cell
+            input.w3-btn.w3-grey.w3-border.w3-select-bigger(type='submit' value='Search' class="w3-margin-bottom w3-round")
+      if posts
+        each post in posts
+          div(class="w3-container w3-card w3-white w3-round w3-margin2")
+            br
+            img(src=""+post.user.picture width="30" height="30" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
+            span(class="w3-right w3-opacity")= post.postDate
+            h4
+              b=post.user.name
+            hr
+            div(class="w3-row-padding" style="margin:0 -16px")
+              div(class="w3-half")
+                img(src=""+post.picture width="300px" height="300px" class="w3-margin-bottom")
+              div(class="w3-half")
+                .w3-ul
+                  li
+                    b Make 
+                    span=post.bike.make
+                  li
+                    b Model 
+                    span=post.bike.model
+                  li
+                    b Year 
+                    span=post.bike.year
+                  li
+                    b Month 
+                    span=post.bike.month
+                  li
+                    b Cylinder Capacity 
+                    span=post.bike.cylinderCapacity
+                  li
+                    b Power  
+                    span=post.bike.power
+                  li
+                    b Kilometers 
+                    span=post.bike.kilometers
+                  li
+                    b Condition 
+                    span=post.bike.condition
+            .w3-btn.w3-grey(value=post.likes class="w3-margin-right w3-round") Like 
+              label="("+post.likes+")"
+            .w3-btn.w3-grey(value=post.dislikes class="w3-margin-right w3-round") Dislike 
+              label="("+post.dislikes+")"
+            .w3-btn.w3-grey(id="comentarios"+post._id class="w3-round") Comments 
+              label="("+post.opinions.length+")"
+            hr
+            .w3-container(id="comentariosContainer"+post._id style="display:none")
+                if post.opinions
+                  .w3-container(id="opinions"+post._id)
+                    each opinion in post.opinions
+                        .w3-card
+                            header
+                            br
+                            .w3-container
+                                img(src=""+opinion.user.picture width="15" height="15" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
+                                h6  
+                                b=opinion.user.name 
+                                p(class="w3-margin-left")=opinion.text
+                        br
+                    
