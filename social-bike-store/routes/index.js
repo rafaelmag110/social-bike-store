@@ -27,7 +27,7 @@ router.get("/login", (req,res)=>{
   res.render('login')
 })
 
-router.get('/searchBike/',(req,res)=>{
+router.get('/searchBike/',passport.authenticate('jwt', {session:false}),(req,res)=>{
   axios.get('http://localhost:6400/api/posts/')
       .then(dados => {
         var filteredPosts = []
@@ -36,8 +36,9 @@ router.get('/searchBike/',(req,res)=>{
             if(dados.data[i].bike.model == req.query.model || req.query.model=="all")
               filteredPosts.push(dados.data[i])
         }
-
-        res.render('index',{loggedIn:false, posts:filteredPosts})
+        axios.get("http://localhost:6400/api/users/" + req.user._id)
+        .then(dados2=>res.render('homeOn',{posts:filteredPosts,user:dados2.data}))
+        .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
       })
       .catch(erro => res.render('error',{error:erro,message:"Erro na procura das bikes"}))
 })

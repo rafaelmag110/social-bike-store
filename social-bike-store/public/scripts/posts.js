@@ -103,6 +103,12 @@ $(()=>{
                             $('<label />').html("("+ dislikes+")").appendTo(dislikebtn);
                         }).change();
 
+                        $( document ).ready( function() {
+                            $( "#comentarios"+value._id ).click( function() {
+                              $( "#comentariosContainer"+value._id ).toggle( 'slow' );
+                            });
+                          });
+
                         $("#addOpinion"+value._id).click((e)=>{
                             e.preventDefault();
                             var user =$("#user"+value._id).val();
