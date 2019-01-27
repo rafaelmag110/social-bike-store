@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .w3-container
+        form.w3.container(method="POST" action="/import/" enctype='multipart/form-data')
+            h2 JSON
+            input.w3-input(type='file' name='json' required)
+            h2 Zip com foto users
+            input.w3-input(type='file' name='users' required)
+            h2 ZIP com foto posts
+            input.w3-input(type='file' name='posts' required)
+            input.w3-btn(type="submit" value="submeter")
