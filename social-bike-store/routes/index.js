@@ -60,7 +60,7 @@ router.post('/import/',(req,res)=>{
 })
 
 router.get("/abouton/:id", (req,res)=>{
-   axios.get("http://localhost:6400/api/users/" + req.user._id)
+   axios.get("http://localhost:6400/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
         .then(dados=>  res.render('aboutOn',{user:dados.data}))
         .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
 })

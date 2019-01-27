@@ -63,9 +63,9 @@ router.get("/profile/:id", (req,res)=>{
 
 /*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
 router.get("/profileVisit/:id", passport.authenticate('jwt', {session:false}), (req,res)=>{
-  axios.get("http://localhost:6400/api/users/" + req.user._id)
+  axios.get("http://localhost:6400/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
         .then(dados=>{
-          axios.get('http://localhost:6400/api/users/'+req.params.id)
+          axios.get('http://localhost:6400/api/users/'+req.params.id, {headers: {cookie: req.headers.cookie}})
           .then(dados1 => {
             axios.get('http://localhost:6400/api/posts/'+req.params.id)
               .then(dados2=> {

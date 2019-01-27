@@ -83,7 +83,7 @@ router.get('/export/',(req,res)=>{
 
 // Insert Post
 router.post('/', passport.authenticate('jwt', {session:false}), (req,res)=>{
-    req.body.postDate= new Date();
+    req.body.postDate= new Date().toLocaleString();
     Post.insert(req.body)
         .then(dados =>{ res.jsonp(dados)})
         .catch(erro =>{ res.status(500).send(erro)})
