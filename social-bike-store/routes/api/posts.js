@@ -60,5 +60,34 @@ router.post('/opinions/:id', (req,res)=>{
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
+router.get('/export/:userid',(req,res)=>{
+    Post.consult(req.params.userid)
+        .then(dados => {
+            var userExport = {};
+            var users = [];
+            var posts = [];
+            var bikes = [];
+            var cur = {};
+            for(i=0; i < dados.length; i++){
+                cur = dados[i];
+                bikes.push(cur.bike)
+                users.push(cur.user)
+                var tempBike = cur.bike._id
+                cur.bike = tempBike
+                var tempUser = cur.user._id
+                cur.user = tempUser;
+                for(j = 0; j < cur.opinions.length; j++){
+                    var tempUserName = cur.opinons[j].user.name
+                    cur.opinions[j].user = tempUserName;
+                }
+                posts.push(cur);
+            }
+            userExport.users=users;
+            userExport.posts=posts;
+            userExport.bikes=bikes;
+            res.jsonp(userExport);
+        })
+        .catch(erro => {res.status(500).send(erro)})
+})
 
 module.exports = router;

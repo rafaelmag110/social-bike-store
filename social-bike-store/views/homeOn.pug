@@ -6,7 +6,7 @@ block content
         form.w3-container(method="GET" action="/searchBike" class="w3-cell-row w3-margin-right")
           .w3-container.w3-cell
             select.w3-select-bigger(name='make' id='makemenu' class="w3-select w3-margin-bottom" required)
-                option(value="" disabled select) ---          .w3-col.l3.m3
+                option(value="" disabled select) ---
           .w3-container.w3-cell
             select.w3-select-bigger(name='model' id='modelmenu' class="w3-select w3-margin-bottom" required)
                 option(value="all") All
@@ -14,8 +14,7 @@ block content
             input.w3-btn.w3-grey.w3-border.w3-select-bigger(type='submit' value='Search' class="w3-margin-bottom w3-round")
       if posts
         each post in posts
-          p(id="user"+post._id hidden)
-            =user.name
+          p(id="user"+post._id hidden)=user.name
           div(class="w3-container w3-card w3-white w3-round w3-margin2")
             br
             img(src=""+post.user.picture width="30" height="30" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
@@ -73,6 +72,9 @@ block content
                             p(class="w3-margin-left")=opinion.text
                       br
                   form(id="opinion"+post._id)
-                  textarea.w3-input.w3-border(type='text' id='body'+post._id placeholder='Write something...!')
-                  br
-                  input.w3-btn.w3-grey(id="addOpinion"+post._id value='Comment' class="w3-margin-bottom w3-round")
+                    input(type="hidden" id="user"+post._id value=user._id) 
+                    input(type="hidden" id="username"+post._id value=user.name) 
+                    input(type="hidden" id="userphoto"+post._id value=user.picture)
+                    textarea.w3-input.w3-border(type='text' id='body'+post._id placeholder='Write something...!')
+                    br
+                    input.w3-btn.w3-grey(id="addOpinion"+post._id value='Comment' class="w3-margin-bottom w3-round")

@@ -111,29 +111,28 @@ $(()=>{
 
                         $("#addOpinion"+value._id).click((e)=>{
                             e.preventDefault();
-                            var user =$("#user"+value._id).val();
+                            var user =$("input#user"+value._id).val();
+                            var username = $("input#username"+value._id).val();
+                            var photo = $("input#userphoto"+value._id).val();
                             var text = $("#body"+value._id).val();
-                            var texthtml = $("<p />").html(text)
-                            var userhtml = $("<b />").html(user).appendTo($("<p />"))
-
+                            var texthtml = $("<p class='w3-margin-left' />").html(text)
+                            var userhtml = $("<b />").html(username).appendTo($("<h6 />"))
+                            var photohtml = $("<img class ='w3-left w3-circle w3-margin-right' src='"+photo+"' width='15' height='15' right='0' alt='Avatar' />")
                             $.ajax({
                                 type:"POST",
                                 data:{
-                                    // _id:user,
+                                    user:user,
                                     text:text
                                 },
                                 url:`/posts/opinion/`+value._id,
                                 success: () => {
-                                    
-                                },
-                                error: ()=>{
-                                    alert("Something went wrong. Your comment could not be saved.")
+                                   
                                 }
                             })
-                            $("#user"+value._id).val("")
                             $("#body"+value._id).val("")
-                            $("#opinions"+value._id).append(userhtml)
-                            $("#opinions"+value._id).append(texthtml)
+                            var newpost = $("<div class='w3-container' />").append(photohtml).append(userhtml).append(texthtml)
+                            var header = $("<header />").append($("<br>")).append(newpost)
+                            $("#opinions"+value._id).append($("<div class='w3-card' />").append(header)).append("<br>")
                         })
 
                     })
