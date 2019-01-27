@@ -20,6 +20,7 @@ module.exports.consult = userid =>{
     return Post
         .find({user:userid})
         .populate('user bike')
+        .populate('opinions.user')
         .sort({postDate: -1})
         .exec()
 }
