@@ -7,7 +7,7 @@ block content
                 img(src=""+user.picture width="120" height="120" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
                 button.w3-btn.w3-grey.w3-tiny.w3-round(id="editar") Edit Picture 
             .w3-container.w3-cell(id="editarFoto" style="display:none")
-                form.w3-container(method='POST' action='/users/editPhoto/'+user._id enctype="multipart/form-data")
+                form.w3-container(method='POST' action='/users/editPhoto/' enctype="multipart/form-data")
                     label
                         b Picture
                         input.w3-input( type='file' name='picture' accept='image/*' required)

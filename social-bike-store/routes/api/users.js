@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken')
 var User = require('../../controllers/api/user')
 
 // Get Users list
-router.get('/', (req,res)=>{
+router.get('/', passport.authenticate('jwt', {session:false}), (req,res)=>{
     if(req.query.email){
         // request has query string email
         User.consultByEmail(req.query.email)
@@ -25,14 +25,14 @@ router.post('/', (req,res)=>{
         .catch(erro =>{ res.status(500).send(erro)})
 })
 
-router.get('/:id', (req,res)=>{
+router.get('/:id', passport.authenticate('jwt', {session:false}), (req,res)=>{
     User.consultById(req.params.id)
         .then(dados => res.jsonp(dados))
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
-router.post('/editPicture',(req,res)=>{
-    User.editPicture(req.body.id,req.body.picture)
+router.post('/:id/editPicture', passport.authenticate('jwt', {session:false}), (req,res)=>{
+    User.editPicture(req.params.id,req.body.picture)
         .then(dados => {
             res.jsonp(dados)
         })
