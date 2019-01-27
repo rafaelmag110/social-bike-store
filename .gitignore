@@ -1,3 +1,4 @@
 social-bike-store/node_modules/
 social-bike-store/package-lock.json
 social-bike-store/session-store.db
+social-bike-store/public/uploaded/

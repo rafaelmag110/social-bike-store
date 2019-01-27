@@ -37,6 +37,8 @@ router.post('/dislike/:id',(req,res)=>{
 })
 /*adicionar user ao reqbody*/ 
 router.post('/opinion/:id',(req,res)=>{
+    req.body.user = req.user._id;
+    console.log(req.body)
     axios.post('http://localhost:6400/api/posts/opinions/'+req.params.id,req.body)
         .then(dados => console.log("Comment success: postid:" +req.params.id))
         .catch(erro => {

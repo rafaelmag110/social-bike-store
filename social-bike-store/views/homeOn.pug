@@ -16,6 +16,8 @@ block content
         .w3-row
           .w3-col-l6.m6
             each post in posts
+              p(id="user"+post._id hidden)
+                =user.name
               .w3-container.w3-border
                 .w3-container.w3-border
                   .w3-card-4

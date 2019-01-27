@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
   if(req.isAuthenticated())
     res.redirect('/homeOn')
   else
-    res.render("homeOff",{loggefIn:false})
+    res.redirect('/homeOff')
 });
 
 /*GET página de registo. */
@@ -45,6 +45,7 @@ router.get('/searchBike/',(req,res)=>{
 router.get("/homeOn", passport.authenticate('jwt', {session:false}), (req,res)=>{
   axios.get('http://localhost:6400/api/posts/')
     .then(dados => {
+      console.log(dados.data)
       axios.get("http://localhost:6400/api/users/" + req.user._id)
         .then(dados2=>res.render('homeOn',{posts:dados.data,user:dados2.data}))
         .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})

@@ -113,7 +113,7 @@ $(()=>{
                             $.ajax({
                                 type:"POST",
                                 data:{
-                                    user:user,
+                                    // _id:user,
                                     text:text
                                 },
                                 url:`/posts/opinion/`+value._id,

@@ -31,15 +31,6 @@ router.get('/:id', (req,res)=>{
         .catch(erro => res.status(500).send('Erro getting user with id'+req.params.id))
 })
 
-router.post('/login', passport.authenticate('login', {failureRedirect:'/'}), (req,res)=> {
-        var myuser = {_id: req.user._id, email:req.user.email};
-        // Geração do token
-        var token = jwt.sign({user: myuser}, 'dweb2018');
-        req.session.token = token;
-        console.log('Token stored in ' + req.sessionID)
-        res.jsonp(req.user);
-})
-
 router.post('/editPicture',(req,res)=>{
     User.editPicture(req.body.id,req.body.picture)
         .then(dados => {
