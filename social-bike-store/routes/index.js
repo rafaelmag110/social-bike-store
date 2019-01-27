@@ -22,7 +22,6 @@ router.get('/paginaRegisto',(req,res)=>{
 router.get("/homeOff", (req,res)=>{
   axios.get('http://localhost:6400/api/posts/')
       .then(dados => {
-        console.log(dados.data)
         res.render("homeOff",{posts:dados.data})})
       .catch(erro => res.render('error',{error:erro,message:"Erro na procura dos posts"}))
 })

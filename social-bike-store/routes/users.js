@@ -6,7 +6,6 @@ var jwt = require('jsonwebtoken')
 var formidable = require('formidable');
 var fs = require('fs');
 
-
 /*Efetuar registo, Falta verificar se já está registado!*/
 router.post('/registo',(req,res)=>{
   req.body.picture="/images/default.png"
@@ -18,12 +17,12 @@ router.post('/registo',(req,res)=>{
       // Geração do token
       var token = jwt.sign({user: myuser}, 'dweb2018');
       req.session.token = token;
-      console.log('Token stored in ' + req.sessionID)
+      // console.log('Token stored in ' + req.sessionID)
       res.redirect('/homeOn')
     })
     .catch(erro => {
       // console.log("Ocorreu um erro a registar o utilizador")
-      console.log(erro)
+      // console.log(erro)
       res.render('error',{error:erro,message:"O email inserido já está registado."})
     })
 })
@@ -34,7 +33,7 @@ router.post('/login', passport.authenticate('login', {failureRedirect:'/login'})
   // Geração do token
   var token = jwt.sign({user: myuser}, 'dweb2018');
   req.session.token = token;
-  console.log('Token stored in ' + req.sessionID)
+  // console.log('Token stored in ' + req.sessionID)
   res.redirect('/homeOn')
 })
 
@@ -45,7 +44,7 @@ router.get('/return',  passport.authenticate('facebook', { failureRedirect: '/lo
   // Geração do token
   var token = jwt.sign({user: myuser}, 'dweb2018');
   req.session.token = token;
-  console.log('Token stored in ' + req.sessionID)
+  // console.log('Token stored in ' + req.sessionID)
   res.redirect('/');
 });
 
@@ -80,12 +79,6 @@ router.get("/profileVisit/:id", passport.authenticate('jwt', {session:false}), (
 
 })
 
-
-
-
-
-
-
 /*EditPerfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
 router.post("/editPhoto/", (req,res)=>{
 
@@ -109,7 +102,7 @@ router.post("/editPhoto/", (req,res)=>{
                 .catch(erro => {res.render('error',{error:erro,message:"Erro na modificação dos dados do utilizador."})})
           }
           else{
-            console.log(erro)
+            // console.log(erro)
             res.render('error',{error:erro, message:"Ocorreu um erro a guardar a imagem"})
           }
       })
@@ -117,7 +110,6 @@ router.post("/editPhoto/", (req,res)=>{
 })
 
 router.get('/logout',(req,res)=>{
-  // req.session.token = {}
   delete req.session["token"];
   req.logOut()
   res.redirect('/')

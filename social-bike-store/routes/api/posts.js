@@ -43,7 +43,7 @@ router.get('/export/',(req,res)=>{
                 cur.bike = tempBike
                 var tempUser = cur.user._id
                 cur.user = tempUser;
-                console.log(cur.opinions[0].user._id)
+                // console.log(cur.opinions[0].user._id)
                 for(j = 0; j < cur.opinions.length; j++){
                     var tempUserID = cur.opinions[j].user._id
                     cur.opinions[j].user = tempUserID;
