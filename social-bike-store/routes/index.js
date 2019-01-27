@@ -7,11 +7,10 @@ var User = require("../controllers/api/user")
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    axios.get('http://localhost:6400/api/posts/')
-      .then(dados => {
-        console.log(dados.data)
-        res.render("homeOff",{posts:dados.data})})
-      .catch(erro => res.render('error',{error:erro,message:"Erro na procura dos posts"}))
+    if(req.isAuthenticated())
+      res.redirect('/homeOn')
+    else
+      res.redirect('/homeOff')
   });
 
 /*GET página de registo. */
@@ -21,7 +20,11 @@ router.get('/paginaRegisto',(req,res)=>{
 
 
 router.get("/homeOff", (req,res)=>{
-  res.render('homeOff')
+  axios.get('http://localhost:6400/api/posts/')
+      .then(dados => {
+        console.log(dados.data)
+        res.render("homeOff",{posts:dados.data})})
+      .catch(erro => res.render('error',{error:erro,message:"Erro na procura dos posts"}))
 })
 
 router.get("/login", (req,res)=>{
