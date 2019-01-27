@@ -2,6 +2,10 @@ var express = require('express');
 var router = express.Router();
 var axios = require('axios');
 var passport = require('passport');
+var formidable = require('formidable')
+var fs = require('fs')
+var jszip = require('jszip')
+var mime = require('mime')
 var User = require("../controllers/api/user")
 
 
@@ -34,6 +38,26 @@ router.get("/aboutoff", (req,res)=>{
   res.render('aboutOff')
 })
 
+router.get('/getExportData',(req,res)=>{
+  axios.get('http://localhost:6400/api/posts/export')
+    .then(dados => {
+      res.redirect('/homeOn')
+    })
+    .catch(erro => {
+      res.render('error',{error:erro,message:"Something went wrong exporting the data."})
+    })
+})
+
+router.get('/importPage/',(req,res)=>{
+  res.render('importPage')
+})
+
+router.post('/import/',(req,res)=>{
+  var form = new formidable.IncomingForm()
+  form.parse(req,(erros,fields,files)=>{
+    console.log(files);
+  })
+})
 
 router.get("/abouton/:id", (req,res)=>{
    axios.get("http://localhost:6400/api/users/" + req.user._id)

@@ -2,6 +2,9 @@ var express = require('express')
 var router = express.Router();
 var passport = require('passport');
 var Post = require('../../controllers/api/post')
+var fs = require('fs');
+var jszip = require('jszip')
+
 
 // Get Post list
 router.get('/', (req,res)=>{
@@ -29,7 +32,12 @@ router.get('/', (req,res)=>{
 
 router.get('/export/',(req,res)=>{
     Post.list()
-        .then(dados => {            
+        .then(dados => {
+            var zip = new jszip();
+            zip.file('Readme.txt','Thanks for Downloading!\nYour data is in export.json and the images are in the folder!')
+            var usersImg = zip.folder("users");   
+            var postsImg = zip.folder("posts")
+            
             var userExport = {};
             var users = [];
             var posts = [];
@@ -37,6 +45,12 @@ router.get('/export/',(req,res)=>{
             var cur = {};
             for(i=0; i < dados.length; i++){
                 cur = dados[i];
+                var imgU = fs.readFileSync("./public"+cur.user.picture)
+                var imgP = fs.readFileSync("./public"+cur.picture)
+                usersImg.file("user"+cur.user._id+".png", imgU.toString('base64'), {base64:true})
+                postsImg.file("post"+cur._id+".png",imgP.toString('base64'), {base64:true})
+                cur.user.picture = "/users/user"+cur.user._id
+                cur.picture = "/posts/post"+cur._id
                 bikes.push(cur.bike)
                 users.push(cur.user)
                 var tempBike = cur.bike._id
@@ -53,6 +67,13 @@ router.get('/export/',(req,res)=>{
             userExport.users=users;
             userExport.posts=posts;
             userExport.bikes=bikes;
+
+            zip.file('export.json',JSON.stringify(userExport))
+            zip.generateNodeStream({type:'nodebuffer',streamFiles:true})
+                .pipe(fs.createWriteStream('./public/share/export.zip'))
+                .on('finish', function () {
+                    console.log("export.zip written.");
+                });
             res.jsonp(userExport);
         })
         .catch(erro => {res.status(500).send(erro)})

@@ -109,7 +109,7 @@ $(()=>{
                             });
                           });
 
-$("#addOpinion"+value._id).click((e)=>{
+                        $("#addOpinion"+value._id).click((e)=>{
                             e.preventDefault();
                             var user =$("input#user"+value._id).val();
                             var username = $("input#username"+value._id).val();
