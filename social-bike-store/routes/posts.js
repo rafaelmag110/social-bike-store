@@ -84,7 +84,7 @@ router.post('/novoPost/:id', (req,res)=>{
                         post.picture = fnovo
                         axios.post("http://localhost:6400/api/posts/",post)
                             .then(resposta=>{
-                                res.redirect('/')
+                                res.redirect('/homeOn')
                             })    
                             .catch(erro => {
                                 res.render('error',{error:erro,message:"Ocorreu um erro a guardar o post na BD"})
