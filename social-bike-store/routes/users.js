@@ -58,13 +58,30 @@ router.get("/profile/:id", (req,res)=>{
     .then(dados1 => {
       axios.get('http://localhost:6400/api/posts/'+req.params.id)
         .then(dados2=> {
-          console.log(dados2.data)
           res.render("profile",{user:dados1.data, posts:dados2.data})
         })
         .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
       })
     .catch(erro => {res.render('error',{error:erro,message:"Erro na procura do utilizador"})})
 })
+
+/*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
+router.get("/profileVisit/:id", (req,res)=>{
+  axios.get('http://localhost:6400/api/users/'+req.params.id)
+    .then(dados1 => {
+      axios.get('http://localhost:6400/api/posts/'+req.params.id)
+        .then(dados2=> {
+          res.render("profileVisit",{user:dados1.data, posts:dados2.data})
+        })
+        .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
+      })
+    .catch(erro => {res.render('error',{error:erro,message:"Erro na procura do utilizador"})})
+})
+
+
+
+
+
 
 
 /*EditPerfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/

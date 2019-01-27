@@ -17,10 +17,12 @@ block content
           p(id="user"+post._id hidden)=user.name
           div(class="w3-container w3-card w3-white w3-round w3-margin2")
             br
-            img(src=""+post.user.picture width="30" height="30" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
+            a(href="/users/profileVisit/"+post.user._id)
+              img(src=""+post.user.picture width="30" height="30" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
             span(class="w3-right w3-opacity")= post.postDate
             h4
-              b=post.user.name
+              a(href="/users/profileVisit/"+post.user._id)
+                b(style="color:black")=post.user.name
             hr
             div(class="w3-row-padding" style="margin:0 -16px")
               div(class="w3-half")
@@ -66,9 +68,11 @@ block content
                         header
                           br
                           .w3-container
-                            img(src=""+opinion.user.picture width="15" height="15" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
-                            h6  
-                              b=opinion.user.name 
+                            a(href="/users/profileVisit/"+opinion.user._id)
+                              img(src=""+opinion.user.picture width="15" height="15" right="0" class="w3-left w3-circle w3-margin-right" alt="Avatar")
+                            h6
+                              a(href="/users/profileVisit/"+opinion.user._id)  
+                                b(style="color:black")=opinion.user.name 
                             p(class="w3-margin-left")=opinion.text
                       br
                   form(id="opinion"+post._id)

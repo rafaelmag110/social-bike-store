@@ -7,11 +7,12 @@ var User = require("../controllers/api/user")
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  if(req.isAuthenticated())
-    res.redirect('/homeOn')
-  else
-    res.redirect('/homeOff')
-});
+    axios.get('http://localhost:6400/api/posts/')
+      .then(dados => {
+        console.log(dados.data)
+        res.render("homeOff",{posts:dados.data})})
+      .catch(erro => res.render('error',{error:erro,message:"Erro na procura dos posts"}))
+  });
 
 /*GET página de registo. */
 router.get('/paginaRegisto',(req,res)=>{
@@ -25,6 +26,16 @@ router.get("/homeOff", (req,res)=>{
 
 router.get("/login", (req,res)=>{
   res.render('login')
+})
+
+router.get("/aboutoff", (req,res)=>{
+  res.render('aboutOff')
+})
+
+router.get("/abouton/:id", (req,res)=>{
+   axios.get("http://localhost:6400/api/users/" + req.user._id)
+        .then(dados=>  res.render('aboutOn',{user:dados.data}))
+        .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
 })
 
 router.get('/searchBike/',passport.authenticate('jwt', {session:false}),(req,res)=>{
