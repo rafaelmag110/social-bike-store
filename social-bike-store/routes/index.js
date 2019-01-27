@@ -32,6 +32,7 @@ router.get("/aboutoff", (req,res)=>{
   res.render('aboutOff')
 })
 
+
 router.get("/abouton/:id", (req,res)=>{
    axios.get("http://localhost:6400/api/users/" + req.user._id)
         .then(dados=>  res.render('aboutOn',{user:dados.data}))
