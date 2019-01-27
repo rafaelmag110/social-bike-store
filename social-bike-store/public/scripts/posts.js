@@ -109,15 +109,16 @@ $(()=>{
                             });
                           });
 
-                        $("#addOpinion"+value._id).click((e)=>{
+$("#addOpinion"+value._id).click((e)=>{
                             e.preventDefault();
                             var user =$("input#user"+value._id).val();
                             var username = $("input#username"+value._id).val();
                             var photo = $("input#userphoto"+value._id).val();
                             var text = $("#body"+value._id).val();
+                            var link = $("<a href='/users/profileVisit/"+ user +"'/>").append($("<b style='color:black' />").html(username))
                             var texthtml = $("<p class='w3-margin-left' />").html(text)
-                            var userhtml = $("<b />").html(username).appendTo($("<h6 />"))
-                            var photohtml = $("<img class ='w3-left w3-circle w3-margin-right' src='"+photo+"' width='15' height='15' right='0' alt='Avatar' />")
+                            var userhtml = link.appendTo($("<h6 />"))
+                            var photohtml = $("<a href='/users/profileVisit/"+ user +"'/>").append($("<img class ='w3-left w3-circle w3-margin-right' src='"+photo+"' width='15' height='15' right='0' alt='Avatar' />"))
                             $.ajax({
                                 type:"POST",
                                 data:{

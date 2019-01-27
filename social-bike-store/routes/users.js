@@ -55,13 +55,35 @@ router.get("/profile/:id", (req,res)=>{
     .then(dados1 => {
       axios.get('http://localhost:6400/api/posts/'+req.params.id)
         .then(dados2=> {
-          console.log(dados2.data)
           res.render("profile",{user:dados1.data, posts:dados2.data})
         })
         .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
       })
     .catch(erro => {res.render('error',{error:erro,message:"Erro na procura do utilizador"})})
 })
+
+/*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
+router.get("/profileVisit/:id", passport.authenticate('jwt', {session:false}), (req,res)=>{
+  axios.get("http://localhost:6400/api/users/" + req.user._id)
+        .then(dados=>{
+          axios.get('http://localhost:6400/api/users/'+req.params.id)
+          .then(dados1 => {
+            axios.get('http://localhost:6400/api/posts/'+req.params.id)
+              .then(dados2=> {
+                res.render("profileVisit",{user:dados.data,user2:dados1.data, posts:dados2.data})
+              })
+              .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
+            })
+          .catch(erro => {res.render('error',{error:erro,message:"Erro na procura do utilizador"})})
+                })
+        .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
+
+})
+
+
+
+
+
 
 
 /*EditPerfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
