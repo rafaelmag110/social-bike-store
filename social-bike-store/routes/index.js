@@ -84,7 +84,7 @@ router.post('/import/',(req,res)=>{
     for(i = 0; i < json.users.length; i++){
       var cur = json.users[i]
       var tempPic = cur.picture
-      cur.picture= "./uploaded"+tempPic
+      cur.picture= "/uploaded"+tempPic
       users.push(cur);
     }
 
@@ -98,7 +98,7 @@ router.post('/import/',(req,res)=>{
     for(i=0; i< json.posts.length; i++){
       var cur = json.posts[i]
       var tempPic = cur.picture
-      cur.picture = "./uploaded"+tempPic
+      cur.picture = "/uploaded"+tempPic
       posts.push(cur)
     }
 
