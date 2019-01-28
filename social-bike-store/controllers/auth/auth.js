@@ -35,7 +35,7 @@ var ExtractJWT = require('passport-jwt').ExtractJwt
 
 var extractFromSession = function(req){
     var token = null;
-    console.log(req.session)
+    // console.log(req.session)
     if(req && req.session) token = req.session.token
     return token;
 }

@@ -8,7 +8,7 @@ var bikeDB = require('../public/bike_data.json')
 
 /* Formulário de novo post */
 router.get('/postForm/:id', (req, res)=>{
-    axios.get("http://localhost:6400/api/users/"+req.params.id, {headers: {cookie: req.headers.cookie}})
+    axios.get('http://'+req.hostname+':6400'+"/api/users/"+req.params.id, {headers: {cookie: req.headers.cookie}})
         .then(dados=> res.render('postForm',{bikes:bikeDB, user:dados.data}))
         .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
 })
@@ -18,20 +18,20 @@ router.get('/getBikes',(req,res)=>{
 })
 
 router.get('/getPosts',(req,res)=>{
-    axios.get('http://localhost:6400/api/posts/')
+    axios.get('https://'+req.hostname+':6400'+'/api/posts/')
         .then(dados => res.jsonp(dados.data))
-        .catch(erro => res.status(500).send("Erro a obter os posts"))
+        .catch(erro => {res.status(500).send("Erro a obter os posts")})
 })
 
 router.post('/like/:id',(req,res)=>{
-    axios.post('http://localhost:6400/api/posts/like/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
+    axios.post('http://'+req.hostname+':6400'+'/api/posts/like/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
         .then(dados => {/*console.log("Like sucess: postid:" + req.params.id)*/})
         .catch(erro => {/*console.log("Like fail: postid:" + req.params.id)*/})
 })
 
 
 router.post('/dislike/:id',(req,res)=>{
-    axios.post('http://localhost:6400/api/posts/dislike/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
+    axios.post('http://'+req.hostname+':6400'+'/api/posts/dislike/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
         .then(dados =>{/*console.log("Dislike success: postid:" + req.params.id)*/} )
         .catch(erro =>{/*console.log("Dislike fail: postid:" + req.params.id)*/} )
 })
@@ -39,7 +39,7 @@ router.post('/dislike/:id',(req,res)=>{
 /*adicionar user ao reqbody*/ 
 router.post('/opinion/:id',(req,res)=>{
     req.body.user = req.user._id;
-    axios.post('http://localhost:6400/api/posts/opinions/'+req.params.id, req.body, {headers: {cookie: req.headers.cookie}})
+    axios.post('http://'+req.hostname+':6400'+'/api/posts/opinions/'+req.params.id, req.body, {headers: {cookie: req.headers.cookie}})
         .then(dados =>{/*console.log("Comment success: postid:" +req.params.id)*/})
         .catch(erro => {
             /*console.log("Comment fail: postid:" +req.params.id)*/
@@ -75,14 +75,14 @@ router.post('/novoPost/:id', (req,res)=>{
         bike.condition = fields.condition
         fs.rename(fenviado,fnovo,err=>{
             if(!err){
-                axios.post("http://localhost:6400/api/bikes/", bike, {headers: {cookie: req.headers.cookie}})
+                axios.post("http://"+req.hostname+':6400'+"/api/bikes/", bike, {headers: {cookie: req.headers.cookie}})
                     .then(resposta => {
                         fnovo = '/uploaded/bikes/' + files.picture.name
                         post.opinions = []
                         post.bike = resposta.data._id
                         post.user = req.params.id
                         post.picture = fnovo
-                        axios.post("http://localhost:6400/api/posts/", post, {headers: {cookie: req.headers.cookie}})
+                        axios.post("http://"+req.hostname+':6400'+"/api/posts/", post, {headers: {cookie: req.headers.cookie}})
                             .then(resposta=>{
                                 res.redirect('/homeOn')
                             })    
