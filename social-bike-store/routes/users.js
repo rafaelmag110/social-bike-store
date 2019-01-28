@@ -6,11 +6,12 @@ var jwt = require('jsonwebtoken')
 var formidable = require('formidable');
 var fs = require('fs');
 
+
 /*Efetuar registo, Falta verificar se já está registado!*/
 router.post('/registo',(req,res)=>{
   req.body.picture="/images/default.png"
   req.body.rating="0"
-  axios.post("http://"+req.hostname+"/api/users/", req.body, {headers: {cookie: req.headers.cookie}})
+  axios.post("http://"+req.hostname+':6400'+"/api/users/", req.body, {headers: {cookie: req.headers.cookie}})
     .then(dados => {
       req.session.passport.user = dados.data._id;
       var myuser = {_id: dados.data._id, email:dados.data.email};
@@ -50,9 +51,9 @@ router.get('/return',  passport.authenticate('facebook', { failureRedirect: '/lo
 
 /*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
 router.get("/profile/:id", (req,res)=>{
-  axios.get('http://'+req.hostname+'/api/users/'+req.params.id, {headers: {cookie: req.headers.cookie}})
+  axios.get('http://'+req.hostname+':6400'+'/api/users/'+req.params.id, {headers: {cookie: req.headers.cookie}})
     .then(dados1 => {
-      axios.get('http://'+req.hostname+'/api/posts/'+req.params.id)
+      axios.get('http://'+req.hostname+':6400'+'/api/posts/'+req.params.id)
         .then(dados2=> {
           res.render("profile",{user:dados1.data, posts:dados2.data})
         })
@@ -63,11 +64,11 @@ router.get("/profile/:id", (req,res)=>{
 
 /*Perfil de um utilizador - Falta modificar o modo como se obtem o utilzador logdado*/
 router.get("/profileVisit/:id", passport.authenticate('jwt', {session:false}), (req,res)=>{
-  axios.get("http://"+req.hostname+"/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
+  axios.get("http://"+req.hostname+':6400'+"/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
         .then(dados=>{
-          axios.get('http://'+req.hostname+'/api/users/'+req.params.id, {headers: {cookie: req.headers.cookie}})
+          axios.get('http://'+req.hostname+':6400'+'/api/users/'+req.params.id, {headers: {cookie: req.headers.cookie}})
           .then(dados1 => {
-            axios.get('http://'+req.hostname+'/api/posts/'+req.params.id)
+            axios.get('http://'+req.hostname+':6400'+'/api/posts/'+req.params.id)
               .then(dados2=> {
                 res.render("profileVisit",{user:dados.data,user2:dados1.data, posts:dados2.data})
               })
@@ -90,9 +91,9 @@ router.post("/editPhoto/", (req,res)=>{
           if(!erro){
               var id_picture = {}
               id_picture.picture='/uploaded/users/' + files.picture.name
-              axios.post('http://'+req.hostname+'/api/users/'+req.user._id+'/editPicture', id_picture, {headers: {cookie: req.headers.cookie}})
+              axios.post('http://'+req.hostname+':6400'+'/api/users/'+req.user._id+'/editPicture', id_picture, {headers: {cookie: req.headers.cookie}})
                 .then(dados1 => { 
-                    axios.get('http://'+req.hostname+'/api/posts/'+req.user._id)
+                    axios.get('http://'+req.hostname+':6400'+'/api/posts/'+req.user._id)
                         .then(dados2=> {
                           // console.log(dados2.data)
                           res.render("profile",{user:dados1.data, posts:dados2.data})

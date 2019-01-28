@@ -19,9 +19,10 @@ var apiPostsRouter = require('./routes/api/posts');
 var apiBikesRouter = require('./routes/api/bikes');
 
 // Mongoose Connection
+var mongoLOCAL = 'mongodb://127.0.0.1:27017/social-bike-store'
 var mongoDB = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/social-bike-store'
 var mongoDB_DEV = 'mongodb://administrador:o42eo58saogays@ds229380.mlab.com:29380/social-bike-store'
-mongoose.connect(mongoDB_DEV, {useNewUrlParser:true})
+mongoose.connect(mongoLOCAL, {useNewUrlParser:true})
   .then(()=> console.log('Mongo ready: ' + mongoose.connection.readyState))
   .catch(()=> console.log('Erro de conexão'))
 
