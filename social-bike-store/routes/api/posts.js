@@ -112,9 +112,8 @@ router.get('/export/',(req,res)=>{
         .on('finish', function () {
             console.log("export.zip written.");
         });
-    res.jsonp(userExport);
+    res.redirect("/importPage")
 })
-
 
 // Insert Post
 router.post('/', passport.authenticate('jwt', {session:false}), (req,res)=>{
