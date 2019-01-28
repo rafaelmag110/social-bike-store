@@ -25,23 +25,24 @@ router.get('/getPosts',(req,res)=>{
 
 router.post('/like/:id',(req,res)=>{
     axios.post('http://localhost:6400/api/posts/like/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
-        .then(dados => console.log("Like sucess: postid:" + req.params.id))
-        .catch(erro => console.log("Like fail: postid:" + req.params.id))
+        .then(dados => {/*console.log("Like sucess: postid:" + req.params.id)*/})
+        .catch(erro => {/*console.log("Like fail: postid:" + req.params.id)*/})
 })
 
 
 router.post('/dislike/:id',(req,res)=>{
     axios.post('http://localhost:6400/api/posts/dislike/'+req.params.id, {}, {headers: {cookie: req.headers.cookie}})
-        .then(dados => console.log("Dislike success: postid:" + req.params.id))
-        .catch(erro => console.log("Dislike fail: postid:" + req.params.id))
+        .then(dados =>{/*console.log("Dislike success: postid:" + req.params.id)*/} )
+        .catch(erro =>{/*console.log("Dislike fail: postid:" + req.params.id)*/} )
 })
+
 /*adicionar user ao reqbody*/ 
 router.post('/opinion/:id',(req,res)=>{
     req.body.user = req.user._id;
     axios.post('http://localhost:6400/api/posts/opinions/'+req.params.id, req.body, {headers: {cookie: req.headers.cookie}})
-        .then(dados => console.log("Comment success: postid:" +req.params.id))
+        .then(dados =>{/*console.log("Comment success: postid:" +req.params.id)*/})
         .catch(erro => {
-            console.log("Comment fail: postid:" +req.params.id)
+            /*console.log("Comment fail: postid:" +req.params.id)*/
             res.status(500).send("Comment fail")
         })
 })

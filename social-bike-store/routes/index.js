@@ -28,7 +28,6 @@ router.get('/paginaRegisto',(req,res)=>{
 router.get("/homeOff", (req,res)=>{
   axios.get('http://localhost:6400/api/posts/')
       .then(dados => {
-        console.log(dados.data)
         res.render("homeOff",{posts:dados.data})})
       .catch(erro => res.render('error',{error:erro,message:"Erro na procura dos posts"}))
 })
@@ -146,7 +145,7 @@ router.post('/import/',(req,res)=>{
 })
 
 router.get("/abouton/:id", (req,res)=>{
-   axios.get("http://localhost:6400/api/users/" + req.user._id)
+   axios.get("http://localhost:6400/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
         .then(dados=>  res.render('aboutOn',{user:dados.data}))
         .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
 })

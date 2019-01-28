@@ -18,25 +18,38 @@ block content
         .w3-container.w3-cell-row
             .w3-container.w3-cell
             p
-                b Rating: #{user.rating}
+                h3
+                    b Rating: #{user.rating}
             dl
                 dt 
-                    b Name:
+                    h4
+                        b Name:
                 dd= user.name
                 dt 
-                    b Nationality:
+                    h4
+                        b Nationality:
                 dd= user.nationality
                 dt 
-                    b District:
+                    h4
+                        b District:
                 dd= user.district
                 dt 
-                    b City:
+                    h4
+                        b City:
                 dd= user.city
+                if (user.cellPhone)
+                    dt 
+                        h4
+                            b CellPhone:
+                    dd= user.cellPhone
+                else 
+                    dt 
+                        h4
+                            b CellPhone:
+                    dd N/A
                 dt 
-                    b CellPhone:
-                dd= user.cellPhone
-                dt 
-                    b Birth:
+                    h4
+                        b Birth:
                 dd= user.birth
             .w3-container.w3-cell.w3-border-left2(style="width:70%")
                 h1 
@@ -55,7 +68,7 @@ block content
                             hr
                             div(class="w3-row-padding" style="margin:0 -16px")
                                 div(class="w3-half")
-                                    img(src=""+post.picture width="250px" height="250px" class="w3-margin-bottom")
+                                    img(src=""+post.picture width="320px" height="250px" class="w3-margin-bottom")
                                 div(class="w3-half")
                                     .w3-ul
                                         li

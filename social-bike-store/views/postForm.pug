@@ -21,12 +21,12 @@ block content
                                         p
                                             select.w3-select-bigger(name='model' id='modelmenu' class="w3-select")
                                     label
-                                        b Year
+                                        b Year of first registration
                                     p
                                         select.w3-select-bigger(name='year' id='yearmenu' class='w3-select' required)
                                             option(value="" disabled select) Year
                                     label
-                                        b Month
+                                        b Month of first registration
                                     p
                                         select.w3-select-bigger(name='month' id='monthmenu' class="w3-select" required)
                                             option(value="" disabled select) Month
@@ -34,14 +34,14 @@ block content
                 .w3-col.l6.m6
                     .w3-container
                             header.w3-container
-                                h2 Specify the details
+                                h2 Specify the details of your bike
                             .w3-container
                                     br
                                     label
-                                        b Cylinder Capacity
+                                        b Cylinder Capacity (cc)
                                     input.w3-input.w3-round-large.w3-border(type='number' name='cylinderCapacity' pattern="9[0-9]{8}" required)
                                     label
-                                        b Power
+                                        b Power (hp)
                                     input.w3-input.w3-round-large.w3-border(type='number' name='power' required)
                                     label
                                         b Kilometers
@@ -50,9 +50,9 @@ block content
                                         b Condition
                                     input.w3-input.w3-round-large.w3-border(type='text' name='condition' required)
                                     label
-                                        b Picture
+                                        b Upload a good quality picture of your machine
                                     input.w3-input(type='file' name='picture' accept='image/*' required)
                                     br
                 footer
                     .w3-container.w3-right
-                        input.w3-btn.w3-grey.w3-round(type="submit" value="Postar")
+                        input.w3-btn.w3-grey.w3-round(type="submit" value="Submit")
