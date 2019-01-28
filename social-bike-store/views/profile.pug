@@ -100,7 +100,7 @@ block content
                                 label="("+post.likes+")"
                             .w3-btn.w3-grey(value=post.dislikes id="dislike"+post._id class="w3-margin-right w3-round") Dislike 
                                 label="("+post.dislikes+")"
-                            .w3-btn.w3-grey(id="comentarios"+post._id class="w3-round") Comments 
+                            .w3-btn.w3-grey(id="comentarios"+post._id class="w3-round" value=post.opinions.length) Comments 
                                 label="("+post.opinions.length+")"
                             hr
                             .w3-container(id="comentariosContainer"+post._id style="display:none")

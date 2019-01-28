@@ -103,11 +103,9 @@ $(()=>{
                             $('<label />').html("("+ dislikes+")").appendTo(dislikebtn);
                         }).change();
 
-                        $( document ).ready( function() {
-                            $( "#comentarios"+value._id ).click( function() {
+                        $( "#comentarios"+value._id ).click( function() {
                               $( "#comentariosContainer"+value._id ).toggle( 'slow' );
-                            });
-                          });
+                        });
 
                         $("#addOpinion"+value._id).click((e)=>{
                             e.preventDefault();
@@ -134,6 +132,10 @@ $(()=>{
                             var newpost = $("<div class='w3-container' />").append(photohtml).append(userhtml).append(texthtml)
                             var header = $("<header />").append($("<br>")).append(newpost)
                             $("#opinions"+value._id).append($("<div class='w3-card' />").append(header)).append("<br>")
+                            var comments = $("#comentarios"+value._id).attr("value")
+                            comments++
+                            $("#comentarios"+value._id).empty()
+                            $("#comentarios"+value._id).attr("value",comments).html("Comments ").append("<label> ("+comments+") </label>")
                         })
 
                     })

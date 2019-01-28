@@ -18,7 +18,7 @@ router.get('/getBikes',(req,res)=>{
 })
 
 router.get('/getPosts',(req,res)=>{
-    axios.get('https://'+req.hostname+':6400'+'/api/posts/')
+    axios.get('http://'+req.hostname+':6400'+'/api/posts/')
         .then(dados => res.jsonp(dados.data))
         .catch(erro => {res.status(500).send("Erro a obter os posts")})
 })
