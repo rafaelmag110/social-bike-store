@@ -3,13 +3,12 @@ var router = express.Router();
 var axios = require('axios');
 var passport = require('passport');
 var formidable = require('formidable')
-var mongoose = require('mongoose')
 ObjectId = require('mongodb').ObjectID;
 var fs = require('fs')
 var jsonfile = require('jsonfile')
 var jszip = require('jszip')
+var Validator = require('jsonschema').Validator
 var User = require("../controllers/api/user")
-var base64ToImage= require('base64-to-image')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -61,6 +60,15 @@ router.post('/import/',(req,res)=>{
     var json = jsonfile.readFileSync(files.json.path);
     var usersPics = fs.readFileSync(files.users.path);
     var postsPics = fs.readFileSync(files.posts.path);
+
+    //verificar json
+    var v = new Validator();
+    var schema = require('../public/schema.json')
+    var val = v.validate(json,schema);
+    if(val.throwError == true){
+      res.status(500).send("Your json schema is wrong")
+    }
+
     jszip.loadAsync(usersPics)
       .then(zip => {
         Object.keys(zip.files).forEach(filename => {

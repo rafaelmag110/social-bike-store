@@ -1,0 +1,444 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/root.json",
+    "type": "object",
+    "title": "The Root Schema",
+    "required": [
+      "users",
+      "bikes",
+      "posts"
+    ],
+    "properties": {
+      "users": {
+        "$id": "#/properties/users",
+        "type": "array",
+        "title": "The Users Schema",
+        "items": {
+          "$id": "#/properties/users/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "_id",
+            "email",
+            "password",
+            "name",
+            "birth",
+            "cellPhone",
+            "city",
+            "district",
+            "nationality",
+            "picture",
+            "rating",
+            "__v"
+          ],
+          "properties": {
+            "_id": {
+              "$id": "#/properties/users/items/properties/_id",
+              "type": "object",
+              "title": "The _id Schema",
+              "required": [
+                "$oid"
+              ],
+              "properties": {
+                "$oid": {
+                  "$id": "#/properties/users/items/properties/_id/properties/$oid",
+                  "type": "string",
+                  "title": "The $oid Schema",
+                  "default": "",
+                  "examples": [
+                    "5c4f10c572ab1a89624336cb"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "email": {
+              "$id": "#/properties/users/items/properties/email",
+              "type": "string",
+              "title": "The Email Schema",
+              "default": "",
+              "examples": [
+                "luismp.guimaraes1997@gmail.com"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "password": {
+              "$id": "#/properties/users/items/properties/password",
+              "type": "string",
+              "title": "The Password Schema",
+              "default": "",
+              "examples": [
+                "$2a$10$r4FxTGhoSTdNUuiAwqzzLe9LjMYHpzdo04uT4OuMWsBUit2VmWZpS"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "name": {
+              "$id": "#/properties/users/items/properties/name",
+              "type": "string",
+              "title": "The Name Schema",
+              "default": "",
+              "examples": [
+                "Luís Guimarães"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "birth": {
+              "$id": "#/properties/users/items/properties/birth",
+              "type": "string",
+              "title": "The Birth Schema",
+              "default": "",
+              "examples": [
+                "1111-11-11"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "cellPhone": {
+              "$id": "#/properties/users/items/properties/cellPhone",
+              "type": "string",
+              "title": "The Cellphone Schema",
+              "default": "",
+              "examples": [
+                "958248909"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "city": {
+              "$id": "#/properties/users/items/properties/city",
+              "type": "string",
+              "title": "The City Schema",
+              "default": "",
+              "examples": [
+                "Vilar da Veiga"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "district": {
+              "$id": "#/properties/users/items/properties/district",
+              "type": "string",
+              "title": "The District Schema",
+              "default": "",
+              "examples": [
+                "Braga"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "nationality": {
+              "$id": "#/properties/users/items/properties/nationality",
+              "type": "string",
+              "title": "The Nationality Schema",
+              "default": "",
+              "examples": [
+                "Portugal"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "picture": {
+              "$id": "#/properties/users/items/properties/picture",
+              "type": "string",
+              "title": "The Picture Schema",
+              "default": "",
+              "examples": [
+                "/users/user5c4f10c572ab1a89624336cb.png"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "rating": {
+              "$id": "#/properties/users/items/properties/rating",
+              "type": "string",
+              "title": "The Rating Schema",
+              "default": "",
+              "examples": [
+                "0"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "__v": {
+              "$id": "#/properties/users/items/properties/__v",
+              "type": "integer",
+              "title": "The __v Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            }
+          }
+        }
+      },
+      "bikes": {
+        "$id": "#/properties/bikes",
+        "type": "array",
+        "title": "The Bikes Schema",
+        "items": {
+          "$id": "#/properties/bikes/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "_id",
+            "make",
+            "model",
+            "year",
+            "month",
+            "cylinderCapacity",
+            "power",
+            "kilometers",
+            "condition",
+            "__v"
+          ],
+          "properties": {
+            "_id": {
+              "$id": "#/properties/bikes/items/properties/_id",
+              "type": "object",
+              "title": "The _id Schema",
+              "required": [
+                "$oid"
+              ],
+              "properties": {
+                "$oid": {
+                  "$id": "#/properties/bikes/items/properties/_id/properties/$oid",
+                  "type": "string",
+                  "title": "The $oid Schema",
+                  "default": "",
+                  "examples": [
+                    "5c4f10de72ab1a89624336cc"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "make": {
+              "$id": "#/properties/bikes/items/properties/make",
+              "type": "string",
+              "title": "The Make Schema",
+              "default": "",
+              "examples": [
+                "BMW"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "model": {
+              "$id": "#/properties/bikes/items/properties/model",
+              "type": "string",
+              "title": "The Model Schema",
+              "default": "",
+              "examples": [
+                "all"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "year": {
+              "$id": "#/properties/bikes/items/properties/year",
+              "type": "integer",
+              "title": "The Year Schema",
+              "default": 0,
+              "examples": [
+                1950
+              ]
+            },
+            "month": {
+              "$id": "#/properties/bikes/items/properties/month",
+              "type": "string",
+              "title": "The Month Schema",
+              "default": "",
+              "examples": [
+                "January"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "cylinderCapacity": {
+              "$id": "#/properties/bikes/items/properties/cylinderCapacity",
+              "type": "integer",
+              "title": "The Cylindercapacity Schema",
+              "default": 0,
+              "examples": [
+                1000
+              ]
+            },
+            "power": {
+              "$id": "#/properties/bikes/items/properties/power",
+              "type": "integer",
+              "title": "The Power Schema",
+              "default": 0,
+              "examples": [
+                1000
+              ]
+            },
+            "kilometers": {
+              "$id": "#/properties/bikes/items/properties/kilometers",
+              "type": "integer",
+              "title": "The Kilometers Schema",
+              "default": 0,
+              "examples": [
+                1000
+              ]
+            },
+            "condition": {
+              "$id": "#/properties/bikes/items/properties/condition",
+              "type": "string",
+              "title": "The Condition Schema",
+              "default": "",
+              "examples": [
+                "1000"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "__v": {
+              "$id": "#/properties/bikes/items/properties/__v",
+              "type": "integer",
+              "title": "The __v Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            }
+          }
+        }
+      },
+      "posts": {
+        "$id": "#/properties/posts",
+        "type": "array",
+        "title": "The Posts Schema",
+        "items": {
+          "$id": "#/properties/posts/items",
+          "type": "object",
+          "title": "The Items Schema",
+          "required": [
+            "_id",
+            "likes",
+            "dislikes",
+            "state",
+            "opinions",
+            "bike",
+            "user",
+            "picture",
+            "postDate",
+            "__v"
+          ],
+          "properties": {
+            "_id": {
+              "$id": "#/properties/posts/items/properties/_id",
+              "type": "object",
+              "title": "The _id Schema",
+              "required": [
+                "$oid"
+              ],
+              "properties": {
+                "$oid": {
+                  "$id": "#/properties/posts/items/properties/_id/properties/$oid",
+                  "type": "string",
+                  "title": "The $oid Schema",
+                  "default": "",
+                  "examples": [
+                    "5c4f10de72ab1a89624336cd"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "likes": {
+              "$id": "#/properties/posts/items/properties/likes",
+              "type": "integer",
+              "title": "The Likes Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            },
+            "dislikes": {
+              "$id": "#/properties/posts/items/properties/dislikes",
+              "type": "integer",
+              "title": "The Dislikes Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            },
+            "state": {
+              "$id": "#/properties/posts/items/properties/state",
+              "type": "string",
+              "title": "The State Schema",
+              "default": "",
+              "examples": [
+                "Active"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "opinions": {
+              "$id": "#/properties/posts/items/properties/opinions",
+              "type": "array",
+              "title": "The Opinions Schema"
+            },
+            "bike": {
+              "$id": "#/properties/posts/items/properties/bike",
+              "type": "object",
+              "title": "The Bike Schema",
+              "required": [
+                "$oid"
+              ],
+              "properties": {
+                "$oid": {
+                  "$id": "#/properties/posts/items/properties/bike/properties/$oid",
+                  "type": "string",
+                  "title": "The $oid Schema",
+                  "default": "",
+                  "examples": [
+                    "5c4f10de72ab1a89624336cc"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "user": {
+              "$id": "#/properties/posts/items/properties/user",
+              "type": "object",
+              "title": "The User Schema",
+              "required": [
+                "$oid"
+              ],
+              "properties": {
+                "$oid": {
+                  "$id": "#/properties/posts/items/properties/user/properties/$oid",
+                  "type": "string",
+                  "title": "The $oid Schema",
+                  "default": "",
+                  "examples": [
+                    "5c4f10c572ab1a89624336cb"
+                  ],
+                  "pattern": "^(.*)$"
+                }
+              }
+            },
+            "picture": {
+              "$id": "#/properties/posts/items/properties/picture",
+              "type": "string",
+              "title": "The Picture Schema",
+              "default": "",
+              "examples": [
+                "/posts/post5c4f10de72ab1a89624336cd.png"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "postDate": {
+              "$id": "#/properties/posts/items/properties/postDate",
+              "type": "string",
+              "title": "The Postdate Schema",
+              "default": "",
+              "examples": [
+                "2019-1-28 14:25:34"
+              ],
+              "pattern": "^(.*)$"
+            },
+            "__v": {
+              "$id": "#/properties/posts/items/properties/__v",
+              "type": "integer",
+              "title": "The __v Schema",
+              "default": 0,
+              "examples": [
+                0
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
