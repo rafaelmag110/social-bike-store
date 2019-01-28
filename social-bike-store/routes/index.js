@@ -3,11 +3,13 @@ var router = express.Router();
 var axios = require('axios');
 var passport = require('passport');
 var formidable = require('formidable')
+var mongoose = require('mongoose')
+ObjectId = require('mongodb').ObjectID;
 var fs = require('fs')
+var jsonfile = require('jsonfile')
 var jszip = require('jszip')
-var mime = require('mime')
 var User = require("../controllers/api/user")
-
+var base64ToImage= require('base64-to-image')
 
 /* GET home page. */
 router.get('/', function(req, res) {
@@ -53,10 +55,93 @@ router.get('/importPage/',(req,res)=>{
   res.render('importPage')
 })
 
+
 router.post('/import/',(req,res)=>{
   var form = new formidable.IncomingForm()
   form.parse(req,(erros,fields,files)=>{
-    console.log(files);
+    var json = jsonfile.readFileSync(files.json.path);
+    var usersPics = fs.readFileSync(files.users.path);
+    var postsPics = fs.readFileSync(files.posts.path);
+    jszip.loadAsync(usersPics)
+      .then(zip => {
+        Object.keys(zip.files).forEach(filename => {
+          zip.file(filename).async('nodebuffer').then(content => {
+            var dest = "./public/uploaded/users/" + filename
+            fs.writeFileSync(dest,content)
+          })
+        })
+      })
+    jszip.loadAsync(postsPics)
+      .then(zip => {
+        Object.keys(zip.files).forEach(filename => {
+          zip.file(filename).async('nodebuffer').then(content => {
+            var dest = "./public/uploaded/posts/" + filename
+            fs.writeFileSync(dest,content)
+          })
+        })
+      })
+    
+    var users = [];
+    for(i = 0; i < json.users.length; i++){
+      var cur = json.users[i]
+      var tempPic = cur.picture
+      cur.picture= "./uploaded"+tempPic
+      users.push(cur);
+    }
+
+    var bikes = [];
+    for(i=0; i < json.bikes.length; i++){
+      var cur = json.bikes[i]
+      bikes.push(cur)
+    }
+
+    var posts = [];
+    for(i=0; i< json.posts.length; i++){
+      var cur = json.posts[i]
+      var tempPic = cur.picture
+      cur.picture = "./uploaded"+tempPic
+      posts.push(cur)
+    }
+
+
+    jsonfile.writeFileSync('/tmp/users.json', users)
+    let execUser = require('child_process').execSync
+    let commandUser = 'mongoimport --db social-bike-store --collection users --jsonArray /tmp/users.json' 
+    execUser(commandUser, (err, stdout, stderr) => {
+        if(err){
+          res.status(500).send(err)
+        }
+        else{
+          console.log("Users imported")
+        }
+    })
+
+
+    jsonfile.writeFileSync('/tmp/bikes.json', bikes)
+    let execBikes = require('child_process').execSync
+    let commandBikes = 'mongoimport --db social-bike-store --collection bikes --jsonArray /tmp/bikes.json' 
+    execBikes(commandBikes, (err, stdout, stderr) => {
+        if(err){
+          res.status(500).send(err)
+        }
+        else{
+          console.log("Bikes imported")
+        }
+    })
+
+    jsonfile.writeFileSync('/tmp/posts.json', posts)
+    let execPosts = require('child_process').execSync
+    let commandPosts = 'mongoimport --db social-bike-store --collection posts --jsonArray /tmp/posts.json' 
+    execBikes(commandPosts, (err, stdout, stderr) => {
+        if(err){
+          res.status(500).send(err)
+        }
+        else{
+          console.log("Posts imported")
+        }
+    })
+
+    res.redirect('/')
   })
 })
 
