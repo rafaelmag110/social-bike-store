@@ -62,7 +62,8 @@ router.get("/profile/:id", (req,res)=>{
             likes+=element.likes
             dislikes+=element.dislikes
           });
-          dados1.data.rating=((likes/(likes+dislikes))*100).toFixed(1);
+          if(likes==0) dados1.data.rating=0;
+          else dados1.data.rating=((likes/(likes+dislikes))*100).toFixed(1);
           res.render("profile",{user:dados1.data, posts:dados2.data})
         })
         .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
@@ -85,7 +86,8 @@ router.get("/profileVisit/:id", passport.authenticate('jwt', {session:false}), (
                   likes+=element.likes
                   dislikes+=element.dislikes
                 });
-                dados1.data.rating=((likes/(likes+dislikes))*100).toFixed(1);
+                if(likes==0) dados1.data.rating=0;
+                else dados1.data.rating=((likes/(likes+dislikes))*100).toFixed(1);
                 res.render("profileVisit",{user:dados.data,user2:dados1.data, posts:dados2.data})
               })
               .catch(erro => {res.render('error',{error:erro,message:"Erro ao encontrar os posts do utilizador."})})
