@@ -6,7 +6,7 @@ module.exports.list = () =>{
         .find()
         .populate('user bike')
         .populate('opinions.user')
-        .sort({postDate:1})
+        .sort({postDate:-1})
         .exec()
 }
 

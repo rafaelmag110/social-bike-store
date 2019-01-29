@@ -72,19 +72,25 @@ router.post('/import/',(req,res)=>{
     jszip.loadAsync(usersPics)
       .then(zip => {
         Object.keys(zip.files).forEach(filename => {
-          zip.file(filename).async('nodebuffer').then(content => {
+          var ismac = filename.split('.')[0]
+          if(!(ismac=="__MACOSX/")){
+            zip.file(filename).async('nodebuffer').then(content => {
             var dest = "./public/uploaded/users/" + filename
             fs.writeFileSync(dest,content)
           })
+          }
         })
       })
     jszip.loadAsync(postsPics)
       .then(zip => {
         Object.keys(zip.files).forEach(filename => {
-          zip.file(filename).async('nodebuffer').then(content => {
-            var dest = "./public/uploaded/posts/" + filename
-            fs.writeFileSync(dest,content)
-          })
+          var ismac = filename.split('.')[0]
+          if(!(ismac=="__MACOSX/")){
+            zip.file(filename).async('nodebuffer').then(content => {
+              var dest = "./public/uploaded/posts/" + filename
+              fs.writeFileSync(dest,content)
+            })
+          }
         })
       })
     
@@ -170,6 +176,21 @@ router.get('/searchBike/',passport.authenticate('jwt', {session:false}),(req,res
         axios.get("http://"+req.hostname+':6400'+"/api/users/" + req.user._id, {headers: {cookie: req.headers.cookie}})
         .then(dados2=>res.render('homeOn',{posts:filteredPosts,user:dados2.data}))
         .catch(erro => {res.render('error',{error:erro,message:"Ocorreu um a encontrar o user"})})
+      })
+      .catch(erro => res.render('error',{error:erro,message:"Erro na procura das bikes"}))
+})
+
+
+router.get('/searchBikeOff/',(req,res)=>{
+  axios.get('http://'+req.hostname+':6400'+'/api/posts/', {headers: {cookie: req.headers.cookie}})
+      .then(dados => {
+        var filteredPosts = []
+        for(i=0; i<dados.data.length;i++){
+          if(dados.data[i].bike.make == req.query.make)
+            if(dados.data[i].bike.model == req.query.model || req.query.model=="all")
+              filteredPosts.push(dados.data[i])
+        }
+        res.render("homeOff",{posts:filteredPosts})
       })
       .catch(erro => res.render('error',{error:erro,message:"Erro na procura das bikes"}))
 })
